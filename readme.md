@@ -5,6 +5,7 @@ Welcome to the Nette Starter Template! This is a basic skeleton application buil
 [Nette](https://nette.org), Doctrine, Contributte, and more, with an optimized directory 
 structure for ISPConfig (and presenters are NOT part of the user interface). 
 Ideal for kick-starting your new web projects.
+This package also includes **simple user registration and login**.
 
 Nette is a renowned PHP web development framework, celebrated for its user-friendliness,
 robust security, and outstanding performance. It's among the safest choices
@@ -40,3 +41,9 @@ To quickly dive in, use PHP's built-in server:
 	php -S localhost:8000 -t web
 
 Then, open `http://localhost:8000` in your browser to view the welcome page.
+
+
+TODO
+----------------
+ - [x] ~~Update to latest Nettrine~~
+ - [ ] Try to automatically fix all constants (convert to uppercase)
