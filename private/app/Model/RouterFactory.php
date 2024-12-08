@@ -16,13 +16,11 @@ final class RouterFactory
 	{
 		$router = new RouteList;
 
+		$router->withModule('AdminModule')
+			->addRoute('admin/<presenter>/<action>[/<id>]', 'Home:default');
+
 		$router->withModule('FrontModule')
 			->addRoute('<presenter>/<action>[/<id>]', 'Home:default');
-
-
-
-
-
 
 		return $router;
 	}
