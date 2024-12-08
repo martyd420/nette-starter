@@ -6,7 +6,7 @@ namespace App\AdminModule\Presenters;
 
 use App\AdminModule\Presenters\BaseAdminPresenter;
 
-final class UserPresenter extends BaseAdminPresenter
+final class UsersPresenter extends BaseAdminPresenter
 {
 
 	public function renderDefault()
