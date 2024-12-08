@@ -24,8 +24,7 @@
 		"nettrine/migrations": "^0.9.1",
 		"nettrine/fixtures": "^0.7.2",
 		"contributte/translation": "^2.0",
-		"orisai/tracy-pets": "^1.0",
-		"ublaboo/datagrid": "^6.10"
+		"orisai/tracy-pets": "^1.0"
 	},
 	"require-dev": {
 		"nette/tester": "^2.5",
