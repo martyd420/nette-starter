@@ -40,5 +40,10 @@
 		"allow-plugins": {
 			"symfony/thanks": true
 		}
+	},
+	"scripts": {
+		"post-create-project-cmd": [
+			"php -r \"mkdir('private/log');\""
+		]
 	}
 }
