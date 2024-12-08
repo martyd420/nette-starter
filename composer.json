@@ -1,0 +1,44 @@
+{
+	"name": "martyd420/nette-starter",
+	"description": "My nette starter project for ispconfig",
+	"type": "project",
+	"require": {
+		"php": ">= 8.1",
+		"nette/application": "^3.2.3",
+		"nette/bootstrap": "^3.2",
+		"nette/caching": "^3.2",
+		"nette/database": "^3.2",
+		"nette/di": "^3.2",
+		"nette/forms": "^3.2",
+		"nette/http": "^3.3",
+		"nette/mail": "^4.0",
+		"nette/robot-loader": "^4.0",
+		"nette/security": "^3.2",
+		"nette/utils": "^4.0",
+		"latte/latte": "^3.0",
+		"tracy/tracy": "^2.10",
+		"nettrine/orm": "^0.9.0",
+		"nettrine/dbal": "^0.9.0",
+		"contributte/console": "^0.10.1",
+		"nettrine/migrations": "^0.9.1",
+		"nettrine/fixtures": "^0.7.2",
+		"contributte/translation": "^2.0",
+		"orisai/tracy-pets": "^1.0"
+	},
+	"require-dev": {
+		"nette/tester": "^2.5",
+		"symfony/thanks": "^1"
+	},
+	"autoload": {
+		"psr-4": {
+			"App\\": "private/app"
+		}
+	},
+	"minimum-stability": "stable",
+	"config": {
+		"vendor-dir": "private/vendor",
+		"allow-plugins": {
+			"symfony/thanks": true
+		}
+	}
+}

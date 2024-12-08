@@ -1,0 +1,4 @@
+.idea
+private/vendor
+private/temp/*
+private/log/*

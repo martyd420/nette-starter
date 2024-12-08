@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+
+	<title>{ifset title}{include title|stripHtml} - {/ifset}{$webName}</title>
+</head>
+
+<body>
+
+	<div n:foreach="$flashes as $flash" class="flash">{$flash->message}</div>
+
+	<div class="flash">
+		{if $user->isLoggedIn()}
+			<a n:href="User:logout">Odhlásit</a>
+		{else}
+			<a n:href="Login:">Přihlášení</a>
+		{/if}
+		|
+			ADMIN: {$user->isInRole(\App\Model\Roles::ROLE_ADMIN) ? 'ANO' : 'NE'}
+		|
+	</div>
+
+	{include content}
+
+	<style>
+		.flash {
+			padding: 10px;
+			background: #eee;
+			margin-bottom: 10px;
+			border-radius: 5px;
+		}
+	</style>
+
+	{block scripts}
+		<script src="/js/netteForms.min.js"></script>
+	{/block}
+</body>
+</html>

@@ -1,0 +1,10 @@
+services:
+	- App\Model\RouterFactory::createRouter
+	- App\Model\UserManager
+	- App\Model\Authenticator
+
+search:
+	-	in: %appDir%
+		classes:
+			- *Factory
+			- *Facade
