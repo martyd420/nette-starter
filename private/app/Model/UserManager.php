@@ -19,6 +19,11 @@ class UserManager
 		$this->passwords = $passwords;
 	}
 
+	public function getRepository(): \Doctrine\ORM\EntityRepository
+	{
+		return $this->em->getRepository(User::class);
+	}
+
 	public function updateUser(int $id, ArrayHash $values): User
 	{
 		$user = $this->em->getRepository(User::class)->find($id);

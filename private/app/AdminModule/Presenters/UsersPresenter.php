@@ -17,9 +17,6 @@ final class UsersPresenter extends BaseAdminPresenter
 {
 
 	/** @inject */
-	public SimpleEntityManagerDecorator $em;
-
-	/** @inject */
 	public UserManager $userManager;
 
 	private string $test = 'test-ajax';
@@ -40,7 +37,7 @@ final class UsersPresenter extends BaseAdminPresenter
 	{
 		$grid = DatagridFactory::create();
 
-		$grid->setDataSource($this->em->getRepository(User::class)->createQueryBuilder('u'));
+		$grid->setDataSource($this->userManager->getRepository()->createQueryBuilder('u'));
 
 		$grid->addColumnText('id', 'Id')
 			->setSortable();
