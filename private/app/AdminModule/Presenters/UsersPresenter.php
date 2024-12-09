@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\AdminModule\Presenters;
 
 use App\Model\Entity\User;
+use App\Model\Factory\DatagridFactory;
 use Contributte\Datagrid\Column\Action\Confirmation\StringConfirmation;
 use Contributte\Datagrid\Row;
 use Nette\Forms\Container;
@@ -30,11 +31,9 @@ final class UsersPresenter extends BaseAdminPresenter
 
 	public function createComponentUsersGrid(): Datagrid
 	{
-		$grid = new DataGrid();
+		$grid = DatagridFactory::create();
 
 		$grid->setDataSource($this->em->getRepository(User::class)->createQueryBuilder('u'));
-
-		$grid->setItemsPerPageList([20, 50, 100], true);
 
 		$grid->addColumnText('id', 'Id')
 			->setSortable();
@@ -46,7 +45,10 @@ final class UsersPresenter extends BaseAdminPresenter
 		$grid->addColumnText('nick', 'Nick')
 			->setFilterText();
 
-		$grid->addColumnText('active', 'Active');
+		$grid->addColumnText('active', 'Active')->setReplacement([
+			'1' => 'Aktivní',
+			'0' => 'Neaktivní'
+		]);;
 
 
 		// inline edit
