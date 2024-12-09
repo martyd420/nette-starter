@@ -6,9 +6,10 @@ namespace App\AdminModule\Presenters;
 
 use App\Model\Entity\User;
 use App\Model\Factory\DatagridFactory;
+use App\Model\UserManager;
 use Contributte\Datagrid\Column\Action\Confirmation\StringConfirmation;
-use Contributte\Datagrid\Row;
 use Nette\Forms\Container;
+use Nette\Utils\ArrayHash;
 use Nettrine\ORM\Decorator\SimpleEntityManagerDecorator;
 use Contributte\Datagrid\Datagrid;
 
@@ -18,9 +19,15 @@ final class UsersPresenter extends BaseAdminPresenter
 	/** @inject */
 	public SimpleEntityManagerDecorator $em;
 
-	public function renderDefault()
-	{
+	/** @inject */
+	public UserManager $userManager;
 
+	private string $test = 'test-ajax';
+
+	public function renderDefault():void
+	{
+		$this->template->test = $this->test;
+		parent::beforeRender();
 	}
 
 	public function handleDelete($id)
@@ -74,8 +81,8 @@ final class UsersPresenter extends BaseAdminPresenter
 			]);
 		};
 
-		$inlineEdit->onSubmit[] = function ($id, $values): void {
-			// update user here
+		$inlineEdit->onSubmit[] = function ($id, ArrayHash $values): void {
+			$this->userManager->updateUser((int)$id, $values);
 			$this->flashMessage('Record was updated!', 'success');
 			$this->redrawControl('flashes');
 		};
@@ -93,7 +100,29 @@ final class UsersPresenter extends BaseAdminPresenter
 			);
 
 
+		$inlineAdd = $grid->addInlineAdd()->setText('Add user');
+
+		$inlineAdd->setPositionTop()->onControlAdd[] = function ($container): void {
+			$container->addText('nick', '');
+			$container->addText('email', '');
+			$container->addSelect('active', '', [
+				'1' => 'Active',
+				'0' => 'Inactive',
+			]);
+		};
+
+		$inlineAdd->onSubmit[] = function ($values): void {
+
+			$this->flashMessage('Record was added!', 'success');
+			$this->redrawControl('flashes');
+		};
+
 		return $grid;
 	}
 
+	public function handleTest()
+	{
+		$this->test = 'test-ok ' . date('H:i:s');
+		$this->redrawControl();
+	}
 }
