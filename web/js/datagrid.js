@@ -794,7 +794,8 @@ $(document).on('mouseup', '[data-datagrid-cancel-inline-add]', function(e) {
 
 dataGridRegisterExtension('datagrid-toggle-inline-add', {
 	success: function(payload) {
-		var grid = $('.datagrid-' + payload._datagrid_name);
+		//var grid = $('.datagrid-' + payload._datagrid_name);
+		var grid = $('[data-datagrid-name="' + payload._datagrid_name + '"]');
 
 		if (payload._datagrid_inline_adding) {
 			var row = grid.find('.datagrid-row-inline-add');
