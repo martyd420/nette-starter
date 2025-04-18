@@ -45,7 +45,8 @@
 	},
 	"scripts": {
 		"post-create-project-cmd": [
-			"php -r \"mkdir('private/log');\""
+			"php -r \"mkdir('private/log');\"",
+			"php -r \"mkdir('private/temp');\""
 		]
 	}
 }
