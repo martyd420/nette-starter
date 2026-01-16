@@ -1,0 +1,9 @@
+
+parameters:
+
+nettrine.dbal:
+	connection:
+		host: localhost
+		user: root
+		password: 
+		dbname: nsdb

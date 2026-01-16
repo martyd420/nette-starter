@@ -1,0 +1,21 @@
+.datagrid {
+    padding: 0!important;
+}
+
+.datagrid .col-action {
+    text-align: right;
+}
+
+.datagrid .btn-xs {
+    --tblr-btn-padding-y: 0.125rem;
+    --tblr-btn-padding-x: 0.25rem;
+    --tblr-btn-font-size: 0.7rem;
+    --tblr-btn-line-height: 1.5;
+    --tblr-btn-border-radius: 2px;
+}
+
+.datagrid .btn-xs .icon, .datagrid .btn-xs i {
+    font-size: 0.75rem;
+    vertical-align: middle;
+    margin-top: -2px;
+}

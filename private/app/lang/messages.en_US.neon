@@ -1,2 +1,5 @@
-hello: Hi
-lorem: englishipsum
+"Please enter a valid email address.": "Please enter a valid email address."
+language: Language
+change_language: Change language
+CZ: CZ
+EN: EN

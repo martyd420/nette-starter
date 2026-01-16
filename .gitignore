@@ -2,3 +2,5 @@
 private/vendor
 private/temp/*
 private/log/*
+node_modules
+web/assets

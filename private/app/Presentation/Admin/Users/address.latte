@@ -1,0 +1,62 @@
+{block content}
+	<div class="page-header d-print-none">
+		<div class="container-xl">
+			<div class="row g-2 align-items-center">
+				<div class="col">
+					<h2 class="page-title">{if $isEdit}Edit Address{else}New Address{/if} for {$editedUser->email}</h2>
+				</div>
+                <div class="col-auto ms-auto d-print-none">
+                    <a n:href="edit id => $editedUser->id" class="btn btn-secondary">
+                         Back to User
+                    </a>
+                </div>
+			</div>
+		</div>
+	</div>
+
+	<main id="content" class="page-body">
+		<div class="container-xl">
+			<div class="row">
+				<div class="col-12 col-md-8 offset-md-2">
+					<div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Address Details</h3>
+                        </div>
+                        <div class="card-body">
+                            {form addressForm}
+                                <div class="mb-3">
+                                    {label type, class => 'form-label' /}
+                                    {input type, class => 'form-select'}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    {label street, class => 'form-label' /}
+                                    {input street, class => 'form-control'}
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        {label city, class => 'form-label' /}
+                                        {input city, class => 'form-control'}
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        {label zip, class => 'form-label' /}
+                                        {input zip, class => 'form-control'}
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        {label country, class => 'form-label' /}
+                                        {input country, class => 'form-control'}
+                                    </div>
+                                </div>
+                                
+                                <div class="form-footer">
+                                    {input save, class => 'btn btn-primary w-100'}
+                                </div>
+                            {/form}
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+{/block}

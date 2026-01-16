@@ -1,0 +1,110 @@
+{block content}
+	<div class="page-header d-print-none">
+		<div class="container-xl">
+			<div class="row g-2 align-items-center">
+				<div class="col">
+					<h2 class="page-title">Edit User: {$editedUser->email}</h2>
+				</div>
+                <div class="col-auto ms-auto d-print-none">
+                    <a n:href="default" class="btn btn-secondary">
+                         Back to List
+                    </a>
+                </div>
+			</div>
+		</div>
+	</div>
+
+	<main id="content" class="page-body">
+		<div class="container-xl">
+			<div class="row">
+				<div class="col-12 col-md-8 offset-md-2">
+					<div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">User Details</h3>
+                        </div>
+                        <div class="card-body">
+                            {form userForm}
+                                <div class="mb-3">
+                                    {label email, class => 'form-label' /}
+                                    {input email, class => 'form-control'}
+                                    <div class="invalid-feedback" n:ifcontent>{inputError email}</div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        {label firstName, class => 'form-label' /}
+                                        {input firstName, class => 'form-control'}
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        {label lastName, class => 'form-label' /}
+                                        {input lastName, class => 'form-control'}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        {label role, class => 'form-label' /}
+                                        {input role, class => 'form-select'}
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        {label status, class => 'form-label' /}
+                                        {input status, class => 'form-select'}
+                                    </div>
+                                </div>
+                                
+                                <div class="form-footer">
+                                    {input save, class => 'btn btn-primary w-100'}
+                                </div>
+                            {/form}
+                        </div>
+					</div>
+				</div>
+			</div>
+
+            <div class="row mt-3">
+                <div class="col-12 col-md-8 offset-md-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Addresses</h3>
+                            <div class="card-actions">
+                                <a n:href="addressAdd userId => $editedUser->id" class="btn btn-primary btn-sm">
+                                    Add Address
+                                </a>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table card-table table-vcenter text-nowrap datatable">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Street</th>
+                                        <th>City</th>
+                                        <th>Zip</th>
+                                        <th>Country</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr n:foreach="$editedUser->getAddresses() as $address">
+                                        <td>{$address->type->value}</td>
+                                        <td>{$address->street}</td>
+                                        <td>{$address->city}</td>
+                                        <td>{$address->zip}</td>
+                                        <td>{$address->country}</td>
+                                        <td class="text-end">
+                                            <a n:href="addressEdit id => $address->id" class="btn btn-secondary btn-sm">Edit</a>
+                                        </td>
+                                    </tr>
+                                    <tr n:if="$editedUser->getAddresses()->isEmpty()">
+                                        <td colspan="6" class="text-center text-muted">No addresses found</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+		</div>
+	</main>
+{/block}

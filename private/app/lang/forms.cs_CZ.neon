@@ -1,0 +1,18 @@
+email: E-mail
+password: Heslo
+name: Jméno
+surname: Příjmení
+street: Ulice
+city: Město
+zip: PSČ
+please_enter_email: Zadejte prosím e-mail
+please_enter_password: Zadejte prosím heslo
+please_enter_name: Zadejte prosím jméno
+please_enter_surname: Zadejte prosím příjmení
+please_enter_street: Zadejte prosím ulici
+please_enter_city: Zadejte prosím město
+please_enter_zip: Zadejte prosím PSČ
+create_account: Vytvořit účet
+login: Přihlásit se
+register: Registrovat se
+no_account: "Nemáte účet?"

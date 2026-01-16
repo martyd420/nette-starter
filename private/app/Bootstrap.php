@@ -6,14 +6,13 @@ namespace App;
 
 use Nette;
 use Nette\Bootstrap\Configurator;
-use Nette\Utils\Finder;
+
 
 
 class Bootstrap
 {
-	private Configurator $configurator;
-	private string $rootDir;
-
+	private readonly Configurator $configurator;
+	private readonly string $rootDir;
 
 	public function __construct()
 	{
@@ -30,17 +29,16 @@ class Bootstrap
 		return $this->configurator->createContainer();
 	}
 
-	public function bootForCli(): Nette\DI\Container
-	{
-		$this->initializeEnvironment();
-		$this->setupContainer();
-		$_SERVER['REMOTE_ADDR'] = '127.0.0.1';
-		return $this->configurator->createContainer();
-	}
+    public function bootForCLI(): Nette\DI\Container
+    {
+        $this->initializeEnvironment();
+        $this->setupContainer();
+        return $this->configurator->createContainer();
+    }
 
 	public function initializeEnvironment(): void
 	{
-		$this->configurator->setDebugMode(true);
+		//$this->configurator->setDebugMode('secret@23.75.345.200'); // enable for your remote IP
 		$this->configurator->enableTracy($this->rootDir . '/log');
 
 		$this->configurator->createRobotLoader()
@@ -52,9 +50,7 @@ class Bootstrap
 	private function setupContainer(): void
 	{
 		$configDir = $this->rootDir . '/config';
-
-		foreach(Finder::findFiles('*.neon')->in($configDir) as $configFile) {
-			$this->configurator->addConfig($configFile->getPathname());
-		}
+		$this->configurator->addConfig($configDir . '/common.neon');
+		$this->configurator->addConfig($configDir . '/services.neon');
 	}
 }

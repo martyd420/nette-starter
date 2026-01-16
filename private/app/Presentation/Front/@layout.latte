@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+
+	<title>{ifset title}{include title|stripHtml} | {/ifset}Nette Web</title>
+
+	{asset 'private/assets/js/front/front.js'}
+</head>
+
+<body>
+	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+
+	<nav>
+		<div id="left">
+			<a n:href=":Front:Home:default">{_strings.home}</a>
+			<a n:href=":Admin:Users:default">ADMIN</a>
+		</div>
+
+		<div id="right">
+			{if $user->isLoggedIn()}
+				<span>{_strings.signed_in_as, [email => $user->identity->email]}</span>
+				<a n:href="Login:out">{_strings.logout}</a>
+			{else}
+				<a n:href=":Front:Login:default">{_strings.login}</a>
+				<a n:href=":Front:Register:default">{_strings.register}</a>
+				<span>{_strings.not_logged_in}</span>
+			{/if}
+
+			<form n:name="langForm">
+				<select n:name="lang"></select>
+			</form>
+
+		</div>
+	</nav>
+
+	{include content}
+</body>
+</html>

@@ -1,0 +1,18 @@
+email: Email
+password: Password
+name: Name
+surname: Surname
+street: Street
+city: City
+zip: ZIP Code
+please_enter_email: Please enter email
+please_enter_password: Please enter password
+please_enter_name: Please enter name
+please_enter_surname: Please enter surname
+please_enter_street: Please enter street
+please_enter_city: Please enter city
+please_enter_zip: Please enter ZIP Code
+create_account: Create Account
+login: Sign In
+register: Sign Up
+no_account: "Don’t have an account?"

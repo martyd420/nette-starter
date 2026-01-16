@@ -1,0 +1,8 @@
+includes:
+	- private/vendor/phpstan/phpstan-nette/extension.neon
+
+parameters:
+	scanDirectories:
+		- private/app
+
+	level: 5
