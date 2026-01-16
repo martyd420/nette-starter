@@ -1,17 +1,17 @@
 ![Dashboard](doc/screenshots/screenshot_1.png)
 
-A web application skeleton built with **Nette Framework**, **Doctrine ORM (Contributte)**, and **Vite**, featuring ready-to-use **user login/registration**, **translations** via **contributte/translation** and **contributte/datagrid**.
-This project comes pre-configured with **Bootstrap 5** and **Tabler** for a responsive administration UI.
+A web application skeleton built with **[Nette Framework](https://github.com/nette/nette)**, **[Nettrine](https://github.com/nettrine)** (Doctrine ORM for Nette), and **[Vite](https://github.com/vitejs/vite)**, featuring ready-to-use **user login/registration**, **translations** via **[contributte/translation](https://github.com/contributte/translation)** and **[contributte/datagrid](https://github.com/contributte/datagrid)**.
+This project comes pre-configured with **[Bootstrap 5](https://github.com/twbs/bootstrap)** and **[Tabler](https://github.com/tabler/tabler)** for a responsive administration UI.
 
 
 ## Features
 
-- **Stack**: Nette 3.2, PHP 8.2+, Vite.
+- **Stack**: [Nette 3.2](https://github.com/nette/nette), PHP 8.2+, [Vite](https://github.com/vitejs/vite).
 - **Auth**: Ready-to-use user registration and login.
 - **Translations**: Multi-language support via `contributte/translation`.
-- **ORM**: Doctrine 2 with Contributte integration.
-- **UI**: Tabler Admin Dashboard (Bootstrap 5) for the admin interface.
-- **Frontend**: Vite for fast asset building and HMR.
+- **ORM**: [Doctrine 2](https://github.com/doctrine/orm) with [Nettrine](https://contributte.org/packages/contributte/) (Contributte) integration.
+- **UI**: [Tabler Admin Dashboard](https://github.com/tabler/tabler) (Bootstrap 5) for the admin interface.
+- **Frontend**: [Vite](https://github.com/vitejs/vite) for fast asset building and HMR.
 - **Tools**: PHPStan for static analysis, Nette Tester for testing.
 
 ## Prerequisites
