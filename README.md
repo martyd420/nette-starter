@@ -7,12 +7,26 @@ This project comes pre-configured with **[Bootstrap 5](https://github.com/twbs/b
 ## Features
 
 - **Stack**: [Nette 3.2](https://github.com/nette/nette), PHP 8.2+, [Vite](https://github.com/vitejs/vite).
-- **Auth**: Ready-to-use user registration and login.
-- **Translations**: Multi-language support via `contributte/translation`.
-- **ORM**: [Doctrine 2](https://github.com/doctrine/orm) with [Nettrine](https://contributte.org/packages/contributte/) (Contributte) integration.
-- **UI**: [Tabler Admin Dashboard](https://github.com/tabler/tabler) (Bootstrap 5) for the admin interface.
-- **Frontend**: [Vite](https://github.com/vitejs/vite) for fast asset building and HMR.
-- **Tools**: PHPStan for static analysis, Nette Tester for testing.
+- **ORM**: [Doctrine 2](https://github.com/doctrine/orm) via [Nettrine](https://github.com/nettrine).
+- **Auth**: Pre-configured user registration, login, and basic management example
+- **Admin UI**: [Tabler Admin Dashboard](https://github.com/tabler/tabler) (Bootstrap 5) with a responsive layout.
+- **DataGrid**: Powerful datagrid via [ublaboo/datagrid](https://github.com/ublaboo/datagrid) and [@contributte/datagrid](https://github.com/contributte/datagrid).
+- **AJAX**: AJAX support via [Naja](https://naja.js.org/).
+- **Translations**: Multi-language support (EN, CS) using [contributte/translation](https://github.com/contributte/translation).
+- **Assets**: Nette assets support with [Vite](https://github.com/vitejs/vite).
+- **Tools**: PHPStan for static analysis, Nette Tester for testing, and Tracy for debugging.
+- **CLI**: Console support via [contributte/console](https://github.com/contributte/console).
+
+## Project Structure
+
+- `private/app`: PHP application logic (Presenters, Models, Services).
+  - `Model`: Doctrine entities, repositories, and facades.
+  - `Presentation`: Latte templates and Nette presenters.
+- `private/config`: Configuration files (NEON).
+- `private/lang`: Translation files.
+- `private/assets`: Frontend source files (JS, CSS).
+- `web`: Public directory (entry point, compiled assets).
+- `tests`: Unit and integration tests.
 
 ## Prerequisites
 
@@ -66,6 +80,16 @@ php -S localhost:8000 -t web
 
 Access the application at: `http://localhost:8000`
 
+### 3. Database Management
+For further database changes during development, you can use Doctrine migrations or schema-tool via console:
+```bash
+# Generate migration
+php private/cli/console.php migrations:diff
+
+# Apply migrations
+php private/cli/console.php migrations:migrate
+```
+
 ## Default Credentials
 
 The `composer db:reset` command creates a default administrator account:
@@ -81,6 +105,7 @@ Defined in `composer.json`:
 - `composer db:reset`: **Destructive!** Drops the database schema, clears cache, creates new schema, and loads fixtures.
 - `composer phpstan`: Runs static analysis on `private/app`.
 - `composer tester`: Runs unit/integration tests.
+- `php private/cli/console.php`: Access to various Doctrine and system commands.
 
 ### NPM Scripts
 Defined in `package.json`:
