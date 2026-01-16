@@ -1,0 +1,16 @@
+register: Sign Up
+register_title: Registration
+login_title: Login
+home: Home
+login: Sign In
+logout: Sign Out
+signed_in_as: "Signed in as %email%"
+not_logged_in: Not logged in
+project_successfully_created: 'You have successfully created your <a target="_blank" href="https://github.com/martyd420/nette-starter">Nette Starter</a> Web project.'
+based_on_nette: 'This project is based on the <a target="_blank" href="https://github.com/nette/web-project">nette/web-project</a>'
+already_have_account: "Already have an account?"
+no_account: "Don’t have an account?"
+invalid_credentials: "Invalid login credentials."
+login_success: "You have successfully logged in."
+register_success: "Registration was successful. You can now log in."
+logout_success: "You have been logged out."

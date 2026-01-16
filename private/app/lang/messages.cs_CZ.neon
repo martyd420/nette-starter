@@ -1,2 +1,5 @@
-hello: Ahoj
-lorem: ipsum
+"Please enter a valid email address.": "Zadejte platný email"
+language: Jazyk
+change_language: Změnit jazyk
+CZ: CZ
+EN: EN

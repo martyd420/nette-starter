@@ -1,0 +1,16 @@
+register: Registrovat
+register_title: Registrace
+login_title: Přihlášení
+home: Domů
+login: Přihlásit se
+logout: Odhlásit se
+signed_in_as: "Přihlášen jako %email%"
+not_logged_in: Nejste přihlášeni
+project_successfully_created: 'Úspěšně jste vytvořili svůj webový projekt <a target="_blank" href="https://github.com/martyd420/nette-starter">Nette Starter</a>.'
+based_on_nette: 'Tento projekt je založen na <a target="_blank" href="https://github.com/nette/web-project">nette/web-project</a>'
+already_have_account: "Máte již účet?"
+no_account: "Nemáte účet?"
+invalid_credentials: "Neplatné přihlašovací údaje."
+login_success: "Byl jste úspěšně přihlášen."
+register_success: "Registrace byla úspěšná. Nyní se můžete přihlásit."
+logout_success: "Byl jste odhlášen."

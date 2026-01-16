@@ -1,0 +1,91 @@
+# see https://doc.nette.org/en/configuring
+
+parameters:
+
+session:
+	autoStart: always
+	expiration: 30 days
+
+application:
+	errorPresenter:
+		4xx: Error:Error4xx
+		5xx: Error:Error5xx
+	mapping:
+		*: [App\Presentation, *, **Presenter]
+
+
+#database:
+#	dsn: 'sqlite::memory:'
+#	user:
+#	password:
+
+
+latte:
+	strictParsing: yes
+	extensions:
+		- App\Presentation\Accessory\LatteExtension
+
+
+assets:
+	mapping:
+		default:
+			path: assets
+			type: vite  # Uncomment to activate Vite for asset building
+
+
+di:
+	export:
+		parameters: no
+		tags: no
+
+services:
+	- App\Model\User\Repository\UserRepository
+	- App\Model\User\Repository\AddressRepository
+	- App\Model\User\Service\PasswordService
+	- App\Model\User\Service\Authenticator
+	- App\Model\User\Facade\UserRegistrationFacade
+	- App\Model\User\Facade\UserProfileFacade
+	- App\Model\User\Facade\UserAdminFacade
+	- App\Model\Factory\DatagridFactory()
+	- App\Model\Fixtures\UserFixture
+
+extensions:
+	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+	nettrine.dbal: Nettrine\DBAL\DI\DbalExtension(%debugMode%)
+	nettrine.orm: Nettrine\ORM\DI\OrmExtension
+	nettrine.fixtures: Nettrine\Fixtures\DI\FixturesExtension
+	translation: Contributte\Translation\DI\TranslationExtension
+	orisai.tracyPets: OriNette\TracyPets\DI\TracyPetsExtension
+
+translation:
+	locales:
+		whitelist: [en, cs]
+		default: en
+		fallback: [en]
+	dirs:
+		- %appDir%/lang
+	returnOriginalMessage: true
+
+
+nettrine.dbal:
+	debug:
+		panel: %debugMode%
+
+	connections:
+		default:
+			host: localhost
+			driver: pdo_mysql
+			dbname: nsdb
+			user: nettestarter
+			password: "nettestarter123"
+			charset:  UTF8MB4
+
+nettrine.orm:
+	managers:
+		default:
+			connection: default
+			mapping:
+				App:
+					directories: [%appDir%/Model]
+					namespace: App\Model
+					type: attributes

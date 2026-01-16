@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Admin{ifset title} | {include title|stripHtml}{/ifset}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <style>
+        @import url("https://rsms.me/inter/inter.css");
+    </style>
+
+    {asset 'private/assets/js/admin/admin.js'}
+
+</head>
+<body>
+
+<a href="#content" class="visually-hidden skip-link">Skip to main content</a>
+
+<script>
+    {foreach $flashes as $flash}
+        alert('{$flash->message}');
+    {/foreach}
+</script>
+
+<div class="page">
+    <!-- BEGIN NAVBAR  -->
+    {include part.layout.navbar.header.latte}
+
+    <div class="navbar-expand-md">
+        <div class="collapse navbar-collapse" id="navbar-menu">
+            <div class="navbar">
+                <div class="container-xl">
+                    <div class="row flex-column flex-md-row flex-fill align-items-center">
+                        <div class="col">
+                            <!-- BEGIN NAVBAR MENU -->
+                            <nav aria-label="Primary">
+
+                                <!-- BEGIN NAVBAR MENU ul -->
+                                {include part.layout.navbar.menu.latte}
+                                <!-- END NAVBAR MENU ul -->
+
+                            </nav><!-- END NAVBAR MENU -->
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- END NAVBAR  -->
+
+    <div class="page-wrapper">
+        {include content}
+
+        {include part.layout.footer.latte}
+    </div>
+
+</div><!-- END .page  -->
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

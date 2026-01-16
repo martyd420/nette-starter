@@ -1,0 +1,36 @@
+{
+  "name": "nette-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martyd420/nette-starter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/martyd420/nette-starter/issues"
+  },
+  "homepage": "https://github.com/martyd420/nette-starter#readme",
+  "type": "module",
+  "devDependencies": {
+    "@nette/vite-plugin": "^1.0.2",
+    "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "@contributte/datagrid": "^7.1.0",
+    "@tabler/core": "^1.4.0",
+    "bootstrap": "^5.3.8",
+    "naja": "^3.3.3"
+  }
+}
