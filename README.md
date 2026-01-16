@@ -1,6 +1,6 @@
 ![Dashboard](doc/screenshots/screenshot_1.png)
 
-A web application skeleton built with **Nette Framework**, **Doctrine ORM (Contributte)**, and **Vite**, featuring ready-to-use **user login/registration** and **translations** via **contributte/translation**.
+A web application skeleton built with **Nette Framework**, **Doctrine ORM (Contributte)**, and **Vite**, featuring ready-to-use **user login/registration**, **translations** via **contributte/translation** and **contributte/datagrid**.
 This project comes pre-configured with **Bootstrap 5** and **Tabler** for a responsive administration UI.
 
 
