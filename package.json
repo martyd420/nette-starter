@@ -25,7 +25,8 @@
   "type": "module",
   "devDependencies": {
     "@nette/vite-plugin": "^1.0.2",
-    "vite": "^7.3.1"
+    "vite": "^7.3.1",
+    "vite-plugin-full-reload": "^1.2.0"
   },
   "dependencies": {
     "@contributte/datagrid": "^7.1.0",

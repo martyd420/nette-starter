@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import nette from '@nette/vite-plugin';
+import FullReload from 'vite-plugin-full-reload';
 import path from 'path';
 
 export default defineConfig({
@@ -21,5 +22,6 @@ export default defineConfig({
                 'private/assets/js/front/front.js',
             ],
         }),
+        FullReload(['private/app/**/*.latte']),
     ],
 });
