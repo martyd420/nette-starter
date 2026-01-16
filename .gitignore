@@ -4,3 +4,4 @@ private/temp/*
 private/log/*
 node_modules
 web/assets
+composer.lock
