@@ -12,6 +12,7 @@ use stdClass;
 
 class LoginFormFactory
 {
+	/** @var array<callable> */
 	public array $onSuccess = [];
 
 	public function __construct(

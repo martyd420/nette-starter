@@ -18,6 +18,7 @@ class UserAdminFacade
 	) {
 	}
 
+    /** @param array<string, mixed> $data */
     public function updateUser(int $id, array $data): void
     {
         $user = $this->userRepository->getById($id);

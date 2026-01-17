@@ -134,6 +134,11 @@ final class UsersPresenter extends BaseAdminPresenter
 
     public function processUserForm(Form $form, \stdClass $values): void
     {
+        if (!$this->editedUser) {
+            $form->addError('User not found');
+            return;
+        }
+
         try {
             $this->userAdminFacade->updateUser($this->editedUser->id, (array) $values);
             $this->flashMessage('User updated', 'success');

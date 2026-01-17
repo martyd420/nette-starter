@@ -21,7 +21,7 @@ final class Error4xxPresenter extends Nette\Application\UI\Presenter
 		$file = is_file($file = __DIR__ . "/$code.latte")
 			? $file
 			: __DIR__ . '/4xx.latte';
-		$this->template->httpCode = $code;
-		$this->template->setFile($file);
+		$this->getTemplate()->httpCode = $code;
+		$this->getTemplate()->setFile($file);
 	}
 }

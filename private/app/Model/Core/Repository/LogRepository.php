@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityRepository;
 
 class LogRepository
 {
+    /** @var EntityRepository<Log> */
     private EntityRepository $repository;
 
     public function __construct(

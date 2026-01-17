@@ -14,6 +14,7 @@ use stdClass;
 
 class RegisterFormFactory
 {
+	/** @var array<callable> */
 	public array $onSuccess = [];
 
 	public function __construct(

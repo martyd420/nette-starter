@@ -5,4 +5,4 @@ parameters:
 	scanDirectories:
 		- private/app
 
-	level: 5
+	level: 8

@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityRepository;
 
 class UserRepository
 {
+	/** @var EntityRepository<User> */
 	private EntityRepository $repository;
 
 	public function __construct(

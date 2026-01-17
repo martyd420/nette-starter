@@ -14,6 +14,7 @@ use stdClass;
 
 class AddressFormFactory
 {
+    /** @var array<callable> */
     public array $onSave = [];
 
     public function __construct(

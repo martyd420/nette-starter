@@ -16,17 +16,18 @@ class DatabaseLogger extends AbstractLogger
     }
 
 
-    public function log($level, $message, array $context = []): void
+    public function log($level, string|\Stringable $message, array $context = []): void
     {
         $log = new Log((string) $level, (string) $message);
-        $log->context = $context ? json_encode($context) : '';
+        $encoded = json_encode($context);
+        $log->context = $encoded !== false ? $encoded : '';
         $log->source = $this->findCaller();
 
         $this->logRepository->save($log);
     }
 
 
-    private function findCaller()
+    private function findCaller(): ?string
     {
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 10);
         $loggerFile = __FILE__;
@@ -43,48 +44,48 @@ class DatabaseLogger extends AbstractLogger
     }
 
 
-    public function emergency($message, array $context = []): void
+    public function emergency(string|\Stringable $message, array $context = []): void
     {
         $this->log(LogLevel::EMERGENCY, $message, $context);
     }
 
 
-    public function alert($message, array $context = []): void
+    public function alert(string|\Stringable $message, array $context = []): void
     {
         $this->log(LogLevel::ALERT, $message, $context);
     }
 
 
-    public function critical($message, array $context = []): void
+    public function critical(string|\Stringable $message, array $context = []): void
     {
         $this->log(LogLevel::CRITICAL, $message, $context);
     }
 
 
-    public function error($message, array $context = []): void
+    public function error(string|\Stringable $message, array $context = []): void
     {
         $this->log(LogLevel::ERROR, $message, $context);
     }
 
 
-    public function warning($message, array $context = []): void
+    public function warning(string|\Stringable $message, array $context = []): void
     {
         $this->log(LogLevel::WARNING, $message, $context);
     }
 
 
-    public function notice($message, array $context = []): void
+    public function notice(string|\Stringable $message, array $context = []): void
     {
         $this->log(LogLevel::NOTICE, $message, $context);
     }
 
-    public function info($message, array $context = []): void
+    public function info(string|\Stringable $message, array $context = []): void
     {
         $this->log(LogLevel::INFO, $message, $context);
     }
 
 
-    public function debug($message, array $context = []): void
+    public function debug(string|\Stringable $message, array $context = []): void
     {
         $this->log(LogLevel::DEBUG, $message, $context);
     }

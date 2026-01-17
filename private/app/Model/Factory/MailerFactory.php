@@ -13,6 +13,7 @@ class MailerFactory
 {
 	use SmartObject;
 
+	/** @param array<string, mixed> $config */
 	public function __construct(
 		private array $config,
 	) {
