@@ -6,7 +6,7 @@ This project comes pre-configured with **[Bootstrap 5](https://github.com/twbs/b
 
 ## Features
 
-- **Stack**: [Nette 3.2](https://github.com/nette/nette), PHP 8.2+, [Vite](https://github.com/vitejs/vite).
+- **Stack**: [Nette 3.2](https://github.com/nette/nette), PHP 8.2+, [Vite](https://github.com/vitejs/vite) (HMR + auto reload for Latte templates).
 - **ORM**: [Doctrine 2](https://github.com/doctrine/orm) via [Nettrine](https://github.com/nettrine).
 - **Auth**: Pre-configured user registration, login, and basic management example
 - **Admin UI**: [Tabler Admin Dashboard](https://github.com/tabler/tabler) (Bootstrap 5) with a responsive layout.
@@ -44,11 +44,12 @@ This project comes pre-configured with **[Bootstrap 5](https://github.com/twbs/b
 
 2. **Install Frontend dependencies**
    ```bash
+   nvm use 22
    npm install
    ```
 
 3. **Database Configuration**
-   Default configuration requires a database `nsdb` (user: `nettestarter`, pass: `nettestarter123`). Use these credentials or override them in `private/config/local.neon`.
+   Default configuration requires a local mysql/mariadb database `nsdb` (user: `nettestarter`, pass: `nettestarter123`). Use these credentials or override them in `private/config/local.neon`. Default database credentials are intended for **local development only**.
 
 
 4. **Initialize Database**
@@ -92,7 +93,7 @@ php private/cli/console.php migrations:migrate
 
 ## Default Credentials
 
-The `composer db:reset` command creates a default administrator account:
+The `composer db:reset` command creates a default administrator account - **development only credentials**:
 
 - **Email:** `starter@pcdr.cz`
 - **Password:** `123456`
