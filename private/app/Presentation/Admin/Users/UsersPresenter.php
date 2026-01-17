@@ -37,8 +37,8 @@ final class UsersPresenter extends BaseAdminPresenter
 	#[Inject]
 	public AddressFormFactory $addressFormFactory;
 
-    #[Inject]
-    public FormFactory $formFactory; // for bootstrap example
+	#[Inject]
+	public FormFactory $formFactory; // for bootstrap example
 
 	private ?User $editedUser = null;
 	private ?int $editedAddressId = null;
@@ -160,39 +160,39 @@ final class UsersPresenter extends BaseAdminPresenter
 		return $this->usersGridFactory->create();
 	}
 
-    protected function createComponentBootstrapForm()
-    {
-        $form = $this->formFactory->create();
-        $form->setRenderer(new BootstrapRenderer());
+	protected function createComponentBootstrapForm(): Form
+	{
+		$form = $this->formFactory->create();
+		$form->setRenderer(new BootstrapRenderer());
 
-        $form->addText('name', 'First Name');
-        $form->addText('email', 'Email');
-        $form->addText('password', 'Password');
-        $form->addSelect('role', 'Lorem', ['Lorem ipsum', 'Lorem Lorem ipsum']);
-        $form->addCheckbox('remember', 'I Accept Lorem ipsum dolor sit amet');
-        $form->addRadioList('radio', 'Select option', ['Lorem ipsum', 'Lorem Lorem ipsum']);
-        $form->addSubmit('send', 'Send');
-
-
-        return $form;
-    }
-
-    protected function createComponentHorizontalBootstrapForm()
-    {
-        $form = $this->formFactory->create();
-        $form->setRenderer(new BootstrapHorizontalRenderer());
-
-        $form->addText('name', 'Name');
-        $form->addText('email', 'Email');
-        $form->addText('password', 'Password');
-        $form->addSelect('role', 'Lorem', ['Lorem ipsum', 'Lorem Lorem ipsum']);
-        $form->addCheckbox('remember', 'I Accept');
-        $form->addRadioList('radio', 'Select option', ['Lorem ipsum', 'Lorem Lorem ipsum']);
-        $form->addSubmit('send', 'Send');
+		$form->addText('name', 'First Name');
+		$form->addText('email', 'Email');
+		$form->addText('password', 'Password');
+		$form->addSelect('role', 'Lorem', ['Lorem ipsum', 'Lorem Lorem ipsum']);
+		$form->addCheckbox('remember', 'I Accept Lorem ipsum dolor sit amet');
+		$form->addRadioList('radio', 'Select option', ['Lorem ipsum', 'Lorem Lorem ipsum']);
+		$form->addSubmit('send', 'Send');
 
 
-        return $form;
-    }
+		return $form;
+	}
+
+	protected function createComponentHorizontalBootstrapForm(): Form
+	{
+		$form = $this->formFactory->create();
+		$form->setRenderer(new BootstrapHorizontalRenderer());
+
+		$form->addText('name', 'Name');
+		$form->addText('email', 'Email');
+		$form->addText('password', 'Password');
+		$form->addSelect('role', 'Lorem', ['Lorem ipsum', 'Lorem Lorem ipsum']);
+		$form->addCheckbox('remember', 'I Accept');
+		$form->addRadioList('radio', 'Select option', ['Lorem ipsum', 'Lorem Lorem ipsum']);
+		$form->addSubmit('send', 'Send');
+
+
+		return $form;
+	}
 
 
 }

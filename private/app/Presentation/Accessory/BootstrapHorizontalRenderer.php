@@ -45,7 +45,7 @@ class BootstrapHorizontalRenderer extends DefaultFormRenderer
 				}
 				$control->getControlPrototype()->addClass('form-check-input');
 				$control->getSeparatorPrototype()->setName('div')->addClass('form-check');
-				
+
 				// Label for the pair (e.g. group label)
 				$control->getLabelPrototype()->addClass('col-3 col-form-label pt-0');
 			}
