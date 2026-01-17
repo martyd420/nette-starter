@@ -11,30 +11,30 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'log')]
 class Log
 {
-    #[ORM\Id]
-    #[ORM\Column(type: 'integer')]
-    #[ORM\GeneratedValue]
-    public int $id;
+	#[ORM\Id]
+	#[ORM\Column(type: 'integer')]
+	#[ORM\GeneratedValue]
+	public int $id;
 
-    #[ORM\Column(type: 'datetime_immutable')]
-    public DateTimeImmutable $createdAt;
+	#[ORM\Column(type: 'datetime_immutable')]
+	public DateTimeImmutable $createdAt;
 
-    #[ORM\Column(type: 'string')]
-    public string $level;
+	#[ORM\Column(type: 'string')]
+	public string $level;
 
-    #[ORM\Column(type: 'text')]
-    public string $message;
+	#[ORM\Column(type: 'text')]
+	public string $message;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    public ?string $context = null;
+	#[ORM\Column(type: 'text', nullable: true)]
+	public ?string $context = null;
 
-    #[ORM\Column(type: 'string', nullable: true)]
-    public ?string $source = null;
+	#[ORM\Column(type: 'string', nullable: true)]
+	public ?string $source = null;
 
-    public function __construct(string $level, string $message)
-    {
-        $this->level = $level;
-        $this->message = $message;
-        $this->createdAt = new DateTimeImmutable();
-    }
+	public function __construct(string $level, string $message)
+	{
+		$this->level = $level;
+		$this->message = $message;
+		$this->createdAt = new DateTimeImmutable();
+	}
 }

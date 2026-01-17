@@ -38,18 +38,18 @@ class UserFixture extends AbstractFixture
 		$adminProfile->lastName = 'Starter';
 		$manager->persist($adminProfile);
 
-        // Addresses for Admin
-        for ($j = 0; $j < rand(1, 2); $j++) {
-            $address = new Address(
-                $admin,
-                $j === 0 ? AddressType::Billing : AddressType::Delivery,
-                $faker->streetAddress(),
-                $faker->city(),
-                $faker->postcode(),
-                'CZ'
-            );
-            $manager->persist($address);
-        }
+		// Addresses for Admin
+		for ($j = 0; $j < rand(1, 2); $j++) {
+			$address = new Address(
+				$admin,
+				$j === 0 ? AddressType::Billing : AddressType::Delivery,
+				$faker->streetAddress(),
+				$faker->city(),
+				$faker->postcode(),
+				'CZ'
+			);
+			$manager->persist($address);
+		}
 
 		for ($i = 1; $i <= 5; $i++) {
 			$user = new User(
@@ -65,18 +65,18 @@ class UserFixture extends AbstractFixture
 			$profile->phone = $faker->phoneNumber();
 			$manager->persist($profile);
 
-            // Addresses for User
-            for ($j = 0; $j < rand(1, 2); $j++) {
-                $address = new Address(
-                    $user,
-                    $j === 0 ? AddressType::Billing : AddressType::Delivery,
-                    $faker->streetAddress(),
-                    $faker->city(),
-                    $faker->postcode(),
-                    'CZ'
-                );
-                $manager->persist($address);
-            }
+			// Addresses for User
+			for ($j = 0; $j < rand(1, 2); $j++) {
+				$address = new Address(
+					$user,
+					$j === 0 ? AddressType::Billing : AddressType::Delivery,
+					$faker->streetAddress(),
+					$faker->city(),
+					$faker->postcode(),
+					'CZ'
+				);
+				$manager->persist($address);
+			}
 		}
 
 		$manager->flush();

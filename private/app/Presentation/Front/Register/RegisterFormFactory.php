@@ -19,7 +19,7 @@ class RegisterFormFactory
 
 	public function __construct(
 		private UserRegistrationFacade $registrationFacade,
-        private FormFactory $formFactory,
+		private FormFactory $formFactory,
 	) {
 	}
 

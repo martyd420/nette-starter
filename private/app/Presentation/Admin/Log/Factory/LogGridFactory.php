@@ -10,35 +10,36 @@ use Contributte\Datagrid\Datagrid;
 
 class LogGridFactory
 {
-    public function __construct(
-        private LogRepository $logRepository,
-        private DatagridFactory $datagridFactory,
-    ) {}
+	public function __construct(
+		private LogRepository $logRepository,
+		private DatagridFactory $datagridFactory,
+	) {
+	}
 
-    public function create(): Datagrid
-    {
-        $grid = $this->datagridFactory->create();
-        $grid->setDataSource($this->logRepository->createQueryBuilder('l'));
-        $grid->setDefaultSort(['createdAt' => 'DESC']);
+	public function create(): Datagrid
+	{
+		$grid = $this->datagridFactory->create();
+		$grid->setDataSource($this->logRepository->createQueryBuilder('l'));
+		$grid->setDefaultSort(['createdAt' => 'DESC']);
 
-        $grid->addColumnDateTime('createdAt', 'Time')
-            ->setSortable()
-            ->setFormat('j.n.Y H:i:s');
-            
-        $grid->addColumnText('level', 'Level')
-            ->setSortable()
-            ->setFilterText();
-            
-        $grid->addColumnText('message', 'Message')
-            ->setFilterText();
-            
-        $grid->addColumnText('source', 'Source')
-            ->setFilterText();
+		$grid->addColumnDateTime('createdAt', 'Time')
+			->setSortable()
+			->setFormat('j.n.Y H:i:s');
 
-        $grid->addAction('detail', 'Metadata', 'detail')
-            ->setIcon('eye')
-            ->setClass('btn btn-xs btn-info');
+		$grid->addColumnText('level', 'Level')
+			->setSortable()
+			->setFilterText();
 
-        return $grid;
-    }
+		$grid->addColumnText('message', 'Message')
+			->setFilterText();
+
+		$grid->addColumnText('source', 'Source')
+			->setFilterText();
+
+		$grid->addAction('detail', 'Metadata', 'detail')
+			->setIcon('eye')
+			->setClass('btn btn-xs btn-info');
+
+		return $grid;
+	}
 }

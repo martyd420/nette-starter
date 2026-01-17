@@ -7,7 +7,6 @@ namespace App\Presentation\Error\Error4xx;
 use Nette;
 use Nette\Application\Attributes\Requires;
 
-
 /**
  * Handles 4xx HTTP error responses.
  */

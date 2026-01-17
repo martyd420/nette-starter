@@ -7,8 +7,6 @@ namespace App;
 use Nette;
 use Nette\Bootstrap\Configurator;
 
-
-
 class Bootstrap
 {
 	private readonly Configurator $configurator;
@@ -17,7 +15,7 @@ class Bootstrap
 	public function __construct()
 	{
 		$this->rootDir = dirname(__DIR__);
-		$this->configurator = new Configurator;
+		$this->configurator = new Configurator();
 		$this->configurator->setTempDirectory($this->rootDir . '/temp');
 	}
 
@@ -26,15 +24,17 @@ class Bootstrap
 	{
 		$this->initializeEnvironment();
 		$this->setupContainer();
+
 		return $this->configurator->createContainer();
 	}
 
-    public function bootForCLI(): Nette\DI\Container
-    {
-        $this->initializeEnvironment();
-        $this->setupContainer();
-        return $this->configurator->createContainer();
-    }
+	public function bootForCLI(): Nette\DI\Container
+	{
+		$this->initializeEnvironment();
+		$this->setupContainer();
+
+		return $this->configurator->createContainer();
+	}
 
 	public function initializeEnvironment(): void
 	{
@@ -53,7 +53,7 @@ class Bootstrap
 		$this->configurator->addConfig($configDir . '/common.neon');
 		$this->configurator->addConfig($configDir . '/services.neon');
 
-        if (file_exists($configDir . '/local.neon')) {
+		if (file_exists($configDir . '/local.neon')) {
 			$this->configurator->addConfig($configDir . '/local.neon');
 		}
 	}

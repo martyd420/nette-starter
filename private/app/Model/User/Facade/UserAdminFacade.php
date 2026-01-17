@@ -18,29 +18,29 @@ class UserAdminFacade
 	) {
 	}
 
-    /** @param array<string, mixed> $data */
-    public function updateUser(int $id, array $data): void
-    {
-        $user = $this->userRepository->getById($id);
-        if (!$user) {
-            throw new \Exception("User not found");
-        }
+	/** @param array<string, mixed> $data */
+	public function updateUser(int $id, array $data): void
+	{
+		$user = $this->userRepository->getById($id);
+		if (!$user) {
+			throw new \Exception("User not found");
+		}
 
-        $user->email = $data['email'];
-        $user->roles = [UserRole::from($data['role'])];
-        $user->status = UserStatus::from($data['status']);
+		$user->email = $data['email'];
+		$user->roles = [UserRole::from($data['role'])];
+		$user->status = UserStatus::from($data['status']);
 
-        $profile = $user->getProfile();
-        if (!$profile) {
-            $profile = new UserProfile($user);
-            $this->userRepository->getEntityManager()->persist($profile);
-        }
+		$profile = $user->getProfile();
+		if (!$profile) {
+			$profile = new UserProfile($user);
+			$this->userRepository->getEntityManager()->persist($profile);
+		}
 
-        $profile->firstName = $data['firstName'];
-        $profile->lastName = $data['lastName'];
+		$profile->firstName = $data['firstName'];
+		$profile->lastName = $data['lastName'];
 
-        $this->userRepository->save($user);
-    }
+		$this->userRepository->save($user);
+	}
 
 	public function banUser(User $user): void
 	{
