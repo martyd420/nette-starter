@@ -120,7 +120,10 @@ Defined in `package.json`:
 - `npm run dev`: Starts the Vite development server.
 - `npm run build`: Builds frontend assets for production (`web/assets/`).
 
+### Screenshots
 
-![Users Management](doc/screenshots/screenshot_2.png)
+![Registration](doc/screenshots/screenshot_2.png)
 
 ![User Edit](doc/screenshots/screenshot_3.png)
+
+![User Edit](doc/screenshots/screenshot_4.png)
