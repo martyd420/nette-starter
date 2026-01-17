@@ -166,11 +166,11 @@ final class UsersPresenter extends BaseAdminPresenter
 		$form->setRenderer(new BootstrapRenderer());
 
 		$form->addText('name', 'First Name');
-		$form->addText('email', 'Email');
-		$form->addText('password', 'Password');
+		$form->addText('random', 'Random number');
 		$form->addSelect('role', 'Lorem', ['Lorem ipsum', 'Lorem Lorem ipsum']);
-		$form->addCheckbox('remember', 'I Accept Lorem ipsum dolor sit amet');
-		$form->addRadioList('radio', 'Select option', ['Lorem ipsum', 'Lorem Lorem ipsum']);
+		$form->addInteger('lorem', 'I Accept Lorem ipsum dolor sit amet');
+		$form->addCheckbox('dolor', 'I Lorem dolor only')->setDefaultValue(true);
+		$form->addRadioList('radio', 'Select option', ['Lorem ipsum', 'Lorem Lorem ipsum'])->setDefaultValue(0);
 		$form->addSubmit('send', 'Send');
 
 
@@ -186,8 +186,9 @@ final class UsersPresenter extends BaseAdminPresenter
 		$form->addText('email', 'Email');
 		$form->addText('password', 'Password');
 		$form->addSelect('role', 'Lorem', ['Lorem ipsum', 'Lorem Lorem ipsum']);
-		$form->addCheckbox('remember', 'I Accept');
-		$form->addRadioList('radio', 'Select option', ['Lorem ipsum', 'Lorem Lorem ipsum']);
+		$form->addCheckbox('remember', 'This is a checkbox. Dolor ipsum lorem!')->setDefaultValue(true);
+		$form->addRadioList('radio', 'Select option', ['Lorem ipsum', 'Lorem Lorem ipsum', 'Other'])
+            ->setDefaultValue(1);
 		$form->addSubmit('send', 'Send');
 
 
