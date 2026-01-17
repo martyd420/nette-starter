@@ -12,11 +12,12 @@ This project comes pre-configured with **[Bootstrap 5](https://github.com/twbs/b
 - **Admin UI**: [Tabler Admin Dashboard](https://github.com/tabler/tabler) (Bootstrap 5) with a responsive layout.
 - **DataGrid**: Powerful datagrid via [ublaboo/datagrid](https://github.com/ublaboo/datagrid) and [@contributte/datagrid](https://github.com/contributte/datagrid).
 - **AJAX**: AJAX support via [Naja](https://naja.js.org/).
-- **Translations**: Multi-language support (EN, CS) using [contributte/translation](https://github.com/contributte/translation).
+- **Translations**: Multi-language support using [contributte/translation](https://github.com/contributte/translation).
 - **Assets**: Nette assets support with [Vite](https://github.com/vitejs/vite).
 - **Tools**: PHP-CS-Fixer for code style, PHPStan for static analysis, Nette Tester for testing, and Tracy for debugging.
 - **CLI**: Console support via [contributte/console](https://github.com/contributte/console).
 - **Icons**: [Bootstrap Icons](https://icons.getbootstrap.com/) (CDN).
+- **Forms**: Custom `BootstrapRenderer` and `BootstrapHorizontalRenderer` for easy Bootstrap 5 form rendering in administration.
 
 ## Project Structure
 
