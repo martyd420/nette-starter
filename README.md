@@ -49,10 +49,12 @@ This project comes pre-configured with **[Bootstrap 5](https://github.com/twbs/b
    ```
 
 3. **Database Configuration**
-   Default configuration requires a local mysql/mariadb database `nsdb` (user: `nettestarter`, pass: `nettestarter123`). Use these credentials or override them in `private/config/local.neon`. Default database credentials are intended for **local development only**.
+ 
+   Default configuration requires a local mysql/mariadb database `nsdb` (user: `nettestarter`, pass: `nettestarter123`). Use these credentials or override them in `private/config/local.neon`. Default database credentials are intended for **local development only**. See `private/config/local.neon.example` for reference.
 
 
 4. **Initialize Database**
+ 
    Run the following command to create the schema and load default fixtures (admin user):
    ```bash
    composer db:reset
