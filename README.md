@@ -16,6 +16,7 @@ This project comes pre-configured with **[Bootstrap 5](https://github.com/twbs/b
 - **Assets**: Nette assets support with [Vite](https://github.com/vitejs/vite).
 - **Tools**: PHP-CS-Fixer for code style, PHPStan for static analysis, Nette Tester for testing, and Tracy for debugging.
 - **CLI**: Console support via [contributte/console](https://github.com/contributte/console).
+- **Icons**: [Bootstrap Icons](https://icons.getbootstrap.com/) (CDN).
 
 ## Project Structure
 
