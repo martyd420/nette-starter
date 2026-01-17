@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Presentation\Admin\Users;
 
+use App\Model\Factory\FormFactory;
 use App\Model\User\Entity\User;
 use App\Model\User\Enum\UserRole;
 use App\Model\User\Enum\UserStatus;
@@ -11,6 +12,8 @@ use App\Model\User\Facade\UserAdminFacade;
 use App\Model\User\Factory\UsersGridFactory;
 use App\Model\User\Repository\AddressRepository;
 use App\Model\User\Repository\UserRepository;
+use App\Presentation\Accessory\BootstrapHorizontalRenderer;
+use App\Presentation\Accessory\BootstrapRenderer;
 use App\Presentation\Admin\BaseAdminPresenter;
 use App\Presentation\Admin\Users\Factory\AddressFormFactory;
 use Contributte\Datagrid\Datagrid;
@@ -33,6 +36,9 @@ final class UsersPresenter extends BaseAdminPresenter
 
 	#[Inject]
 	public AddressFormFactory $addressFormFactory;
+
+    #[Inject]
+    public FormFactory $formFactory; // for bootstrap example
 
 	private ?User $editedUser = null;
 	private ?int $editedAddressId = null;
@@ -154,6 +160,39 @@ final class UsersPresenter extends BaseAdminPresenter
 		return $this->usersGridFactory->create();
 	}
 
+    protected function createComponentBootstrapForm()
+    {
+        $form = $this->formFactory->create();
+        $form->setRenderer(new BootstrapRenderer());
+
+        $form->addText('name', 'First Name');
+        $form->addText('email', 'Email');
+        $form->addText('password', 'Password');
+        $form->addSelect('role', 'Lorem', ['Lorem ipsum', 'Lorem Lorem ipsum']);
+        $form->addCheckbox('remember', 'I Accept Lorem ipsum dolor sit amet');
+        $form->addRadioList('radio', 'Select option', ['Lorem ipsum', 'Lorem Lorem ipsum']);
+        $form->addSubmit('send', 'Send');
+
+
+        return $form;
+    }
+
+    protected function createComponentHorizontalBootstrapForm()
+    {
+        $form = $this->formFactory->create();
+        $form->setRenderer(new BootstrapHorizontalRenderer());
+
+        $form->addText('name', 'Name');
+        $form->addText('email', 'Email');
+        $form->addText('password', 'Password');
+        $form->addSelect('role', 'Lorem', ['Lorem ipsum', 'Lorem Lorem ipsum']);
+        $form->addCheckbox('remember', 'I Accept');
+        $form->addRadioList('radio', 'Select option', ['Lorem ipsum', 'Lorem Lorem ipsum']);
+        $form->addSubmit('send', 'Send');
+
+
+        return $form;
+    }
 
 
 }
