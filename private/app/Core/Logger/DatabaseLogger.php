@@ -19,7 +19,7 @@ class DatabaseLogger extends AbstractLogger
     public function log($level, $message, array $context = []): void
     {
         $log = new Log((string) $level, (string) $message);
-        $log->context = @var_export($context, true);
+        $log->context = $context ? json_encode($context) : '';
         $log->source = $this->findCaller();
 
         $this->logRepository->save($log);
