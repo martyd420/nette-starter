@@ -37,19 +37,19 @@ class BootstrapHorizontalRenderer extends DefaultFormRenderer
 				$control->getControlPrototype()->addClass('form-select');
 				$control->getLabelPrototype()->addClass('col-3 col-form-label');
 
-			} elseif ($control instanceof Nette\Forms\Controls\Checkbox || $control instanceof Nette\Forms\Controls\CheckboxList || $control instanceof Nette\Forms\Controls\RadioList) {
-				if ($control instanceof Nette\Forms\Controls\Checkbox) {
-					$control->getLabelPrototype()->addClass('form-check-label');
-				} else {
-					$control->getItemLabelPrototype()->addClass('form-check-label');
-				}
-				$control->getControlPrototype()->addClass('form-check-input');
-				$control->getSeparatorPrototype()->setName('div')->addClass('form-check');
-
-				// Label for the pair (e.g. group label)
-				$control->getLabelPrototype()->addClass('col-3 col-form-label pt-0');
-			}
-
+						} elseif ($control instanceof Nette\Forms\Controls\Checkbox || $control instanceof Nette\Forms\Controls\CheckboxList || $control instanceof Nette\Forms\Controls\RadioList) {
+							$control->getControlPrototype()->addClass('form-check-input');
+			
+							if ($control instanceof Nette\Forms\Controls\Checkbox) {
+								$control->getLabelPrototype()->addClass('form-check-label');
+								$control->getContainerPrototype()->setName('div')->addClass('form-check');
+								$control->setOption('container', 'div class="col offset-3"');
+							} else {
+								$control->getItemLabelPrototype()->addClass('form-check-label');
+								$control->getLabelPrototype()->addClass('col-3 col-form-label pt-0');
+								$control->getSeparatorPrototype()->setName('div')->addClass('form-check');
+							}
+						}
 			if ($control->hasErrors()) {
 				$control->getControlPrototype()->addClass('is-invalid');
 			}
