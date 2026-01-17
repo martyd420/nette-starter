@@ -1,9 +1,20 @@
-
 parameters:
+	mailer:
+		smtp:
+			host: 'smtp.example.com'
+			username: 'user'
+			password: 'password'
+			secure: 'ssl'
 
 nettrine.dbal:
-	connection:
-		host: localhost
-		user: root
-		password: 
-		dbname: nsdb
+	debug:
+		panel: %debugMode%
+
+	connections:
+		default:
+			host: localhost
+			driver: pdo_mysql
+			dbname: nsdb
+			user: nettestarter
+			password: "nettestarter123"
+			charset:  UTF8MB4
