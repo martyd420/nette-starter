@@ -3,10 +3,11 @@ services:
 
 
 search:
-	-	in: %appDir%
+	- in: %appDir%
 		classes:
 			- *Facade
 			- *Factory
 			- *Repository
 			- *Service
 			- *Mailer
+
