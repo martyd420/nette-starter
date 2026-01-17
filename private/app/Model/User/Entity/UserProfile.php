@@ -14,9 +14,9 @@ class UserProfile
 	#[ORM\GeneratedValue]
 	public int $id;
 
-    #[ORM\OneToOne(inversedBy: 'profile', targetEntity: User::class)]
-    #[ORM\JoinColumn(nullable: false)]
-    public User $user;
+	#[ORM\OneToOne(inversedBy: 'profile', targetEntity: User::class)]
+	#[ORM\JoinColumn(nullable: false)]
+	public User $user;
 
 	#[ORM\Column(type: 'string', nullable: true)]
 	public ?string $firstName = null;

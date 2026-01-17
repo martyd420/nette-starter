@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace App\Model\Factory;
 
 use Nette\Mail\Mailer;
-use Nette\Mail\SmtpMailer;
 use Nette\Mail\SendmailMailer;
+use Nette\Mail\SmtpMailer;
 use Nette\SmartObject;
 
 class MailerFactory
 {
 	use SmartObject;
 
+	/** @param array<string, mixed> $config */
 	public function __construct(
 		private array $config,
 	) {
@@ -21,7 +22,7 @@ class MailerFactory
 	public function create(): Mailer
 	{
 		if ($this->config['developmentMode'] && $this->config['sendEmailsInDevMode'] === false) {
-			return new class implements Mailer {
+			return new class () implements Mailer {
 				public function send(\Nette\Mail\Message $mail): void
 				{
 					// do nothing in development mode

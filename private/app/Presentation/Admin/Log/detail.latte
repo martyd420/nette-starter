@@ -1,0 +1,35 @@
+{* private/app/Presentation/Admin/Log/detail.latte *}
+{block content}
+	<div class="page-header d-print-none">
+		<div class="container-xl">
+			<div class="row g-2 align-items-center">
+				<div class="col">
+					<h1 class="page-title">Detail logu #{$log->id}</h1>
+				</div>
+				<div class="col-auto ms-auto">
+					<a n:href="default" class="btn btn-secondary">Zpět na seznam</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<main id="content" class="page-body">
+		<div class="container-xl">
+			<div class="card">
+				<div class="card-body">
+					<table class="table table-bordered">
+						<tr><th>Time</th><td>{$log->createdAt|date:'j.n.Y H:i:s'}</td></tr>
+						<tr><th>Level</th><td><span class="badge bg-blue-lt">{$log->level}</span></td></tr>
+						<tr><th>Source</th><td>{$log->source}</td></tr>
+						<tr><th>Message</th><td>{$log->message}</td></tr>
+					</table>
+					
+					<h3 class="mt-4">Metadata (Context)</h3>
+					<div class="bg-light p-3 border rounded">
+						<pre>{$log->context ?: 'No metadata'}</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+{/block}

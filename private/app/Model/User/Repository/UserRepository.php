@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityRepository;
 
 class UserRepository
 {
+	/** @var EntityRepository<User> */
 	private EntityRepository $repository;
 
 	public function __construct(
@@ -23,10 +24,10 @@ class UserRepository
 		return $this->repository->findOneBy(['email' => $email]);
 	}
 
-    public function getById(int $id): ?User
-    {
-        return $this->repository->find($id);
-    }
+	public function getById(int $id): ?User
+	{
+		return $this->repository->find($id);
+	}
 
 	public function save(User $user): void
 	{
@@ -39,8 +40,8 @@ class UserRepository
 		return $this->entityManager;
 	}
 
-    public function createQueryBuilder(string $alias = 'u', ?string $indexBy = null): \Doctrine\ORM\QueryBuilder
-    {
-        return $this->repository->createQueryBuilder($alias, $indexBy);
-    }
+	public function createQueryBuilder(string $alias = 'u', ?string $indexBy = null): \Doctrine\ORM\QueryBuilder
+	{
+		return $this->repository->createQueryBuilder($alias, $indexBy);
+	}
 }

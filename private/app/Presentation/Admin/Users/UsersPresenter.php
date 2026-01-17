@@ -19,134 +19,140 @@ use Nette\DI\Attributes\Inject;
 
 final class UsersPresenter extends BaseAdminPresenter
 {
-    #[Inject]
-    public UsersGridFactory $usersGridFactory;
+	#[Inject]
+	public UsersGridFactory $usersGridFactory;
 
-    #[Inject]
-    public UserRepository $userRepository;
+	#[Inject]
+	public UserRepository $userRepository;
 
-    #[Inject]
-    public AddressRepository $addressRepository;
+	#[Inject]
+	public AddressRepository $addressRepository;
 
-    #[Inject]
-    public UserAdminFacade $userAdminFacade;
+	#[Inject]
+	public UserAdminFacade $userAdminFacade;
 
-    #[Inject]
-    public AddressFormFactory $addressFormFactory;
+	#[Inject]
+	public AddressFormFactory $addressFormFactory;
 
-    private ?User $editedUser = null;
-    private ?int $editedAddressId = null;
+	private ?User $editedUser = null;
+	private ?int $editedAddressId = null;
 
-    public function actionEdit(int $id): void
-    {
-        $this->editedUser = $this->userRepository->getById($id);
-        if (!$this->editedUser) {
-            $this->flashMessage('User not found', 'danger');
-            $this->redirect('default');
-        }
+	public function actionEdit(int $id): void
+	{
+		$this->editedUser = $this->userRepository->getById($id);
+		if (!$this->editedUser) {
+			$this->flashMessage('User not found', 'danger');
+			$this->redirect('default');
+		}
 
-        $this['userForm']->setDefaults([
-            'email' => $this->editedUser->email,
-            'role' => $this->editedUser->roles[0]->value ?? null,
-            'status' => $this->editedUser->status->value,
-            'firstName' => $this->editedUser->getProfile()?->firstName,
-            'lastName' => $this->editedUser->getProfile()?->lastName,
-        ]);
-    }
+		$this['userForm']->setDefaults([
+			'email' => $this->editedUser->email,
+			'role' => $this->editedUser->roles[0]->value ?? null,
+			'status' => $this->editedUser->status->value,
+			'firstName' => $this->editedUser->getProfile()?->firstName,
+			'lastName' => $this->editedUser->getProfile()?->lastName,
+		]);
+	}
 
-    public function renderEdit(int $id): void
-    {
-        $this->template->editedUser = $this->editedUser;
-    }
+	public function renderEdit(int $id): void
+	{
+		$this->template->editedUser = $this->editedUser;
+	}
 
-    public function actionAddressAdd(int $userId): void
-    {
-        $this->editedUser = $this->userRepository->getById($userId);
-        if (!$this->editedUser) {
-             $this->flashMessage('User not found', 'danger');
-             $this->redirect('default');
-        }
-    }
+	public function actionAddressAdd(int $userId): void
+	{
+		$this->editedUser = $this->userRepository->getById($userId);
+		if (!$this->editedUser) {
+			$this->flashMessage('User not found', 'danger');
+			$this->redirect('default');
+		}
+	}
 
-    public function renderAddressAdd(int $userId): void
-    {
-        $this->template->editedUser = $this->editedUser;
-        $this->template->isEdit = false;
-        $this->setView('address');
-    }
+	public function renderAddressAdd(int $userId): void
+	{
+		$this->template->editedUser = $this->editedUser;
+		$this->template->isEdit = false;
+		$this->setView('address');
+	}
 
-    public function actionAddressEdit(int $id): void
-    {
-        $address = $this->addressRepository->getById($id);
-        if (!$address) {
-            $this->flashMessage('Address not found', 'danger');
-            $this->redirect('default');
-        }
-        $this->editedAddressId = $id;
-        $this->editedUser = $address->user;
-    }
+	public function actionAddressEdit(int $id): void
+	{
+		$address = $this->addressRepository->getById($id);
+		if (!$address) {
+			$this->flashMessage('Address not found', 'danger');
+			$this->redirect('default');
+		}
+		$this->editedAddressId = $id;
+		$this->editedUser = $address->user;
+	}
 
-    public function renderAddressEdit(int $id): void
-    {
-         $this->template->editedUser = $this->editedUser;
-         $this->template->isEdit = true;
-         $this->setView('address');
-    }
+	public function renderAddressEdit(int $id): void
+	{
+		$this->template->editedUser = $this->editedUser;
+		$this->template->isEdit = true;
+		$this->setView('address');
+	}
 
-    protected function createComponentAddressForm(): Form
-    {
-        $userId = $this->editedUser ? $this->editedUser->id : null;
-        $form = $this->addressFormFactory->create($userId, $this->editedAddressId);
-        
-        $this->addressFormFactory->onSave[] = function($address) {
-             $this->flashMessage('Address saved', 'success');
-             $this->redirect('edit', ['id' => $address->user->id]);
-        };
+	protected function createComponentAddressForm(): Form
+	{
+		$userId = $this->editedUser ? $this->editedUser->id : null;
+		$form = $this->addressFormFactory->create($userId, $this->editedAddressId);
 
-        return $form;
-    }
+		$this->addressFormFactory->onSave[] = function ($address) {
+			$this->flashMessage('Address saved', 'success');
+			$this->redirect('edit', ['id' => $address->user->id]);
+		};
 
-    protected function createComponentUserForm(): Form
-    {
-        $form = new Form;
+		return $form;
+	}
 
-        $form->addText('email', 'Email')
-            ->setRequired('Email is required')
-            ->addRule(Form::EMAIL, 'Invalid email format');
+	protected function createComponentUserForm(): Form
+	{
+		$form = new Form();
 
-        $roles = array_column(UserRole::cases(), 'value', 'value');
-        $form->addSelect('role', 'Role', $roles)
-            ->setRequired('Role is required');
+		$form->addText('email', 'Email')
+			->setRequired('Email is required')
+			->addRule(Form::EMAIL, 'Invalid email format');
 
-        $statuses = array_column(UserStatus::cases(), 'value', 'value');
-        $form->addSelect('status', 'Status', $statuses)
-            ->setRequired('Status is required');
+		$roles = array_column(UserRole::cases(), 'value', 'value');
+		$form->addSelect('role', 'Role', $roles)
+			->setRequired('Role is required');
 
-        $form->addText('firstName', 'First Name');
-        $form->addText('lastName', 'Last Name');
+		$statuses = array_column(UserStatus::cases(), 'value', 'value');
+		$form->addSelect('status', 'Status', $statuses)
+			->setRequired('Status is required');
 
-        $form->addSubmit('save', 'Save');
+		$form->addText('firstName', 'First Name');
+		$form->addText('lastName', 'Last Name');
 
-        $form->onSuccess[] = [$this, 'processUserForm'];
+		$form->addSubmit('save', 'Save');
 
-        return $form;
-    }
+		$form->onSuccess[] = [$this, 'processUserForm'];
 
-    public function processUserForm(Form $form, \stdClass $values): void
-    {
-        try {
-            $this->userAdminFacade->updateUser($this->editedUser->id, (array) $values);
-            $this->flashMessage('User updated', 'success');
-            $this->redirect('default');
-        } catch (\Exception $e) {
-            $form->addError($e->getMessage());
-        }
-    }
+		return $form;
+	}
 
-    public function createComponentUsersGrid(): Datagrid
-    {
-        return $this->usersGridFactory->create();
-    }
+	public function processUserForm(Form $form, \stdClass $values): void
+	{
+		if (!$this->editedUser) {
+			$form->addError('User not found');
+
+			return;
+		}
+
+		try {
+			$this->userAdminFacade->updateUser($this->editedUser->id, (array) $values);
+			$this->flashMessage('User updated', 'success');
+			$this->redirect('default');
+		} catch (\Exception $e) {
+			$form->addError($e->getMessage());
+		}
+	}
+
+	public function createComponentUsersGrid(): Datagrid
+	{
+		return $this->usersGridFactory->create();
+	}
 
 
 

@@ -14,10 +14,10 @@ class AddressRepository
 	) {
 	}
 
-    public function getById(int $id): ?Address
-    {
-        return $this->entityManager->find(Address::class, $id);
-    }
+	public function getById(int $id): ?Address
+	{
+		return $this->entityManager->find(Address::class, $id);
+	}
 
 	public function save(Address $address): void
 	{

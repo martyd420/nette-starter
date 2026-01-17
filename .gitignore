@@ -5,3 +5,4 @@ private/log/*
 node_modules
 web/assets
 private/config/local.neon
+.php-cs-fixer.cache

@@ -24,53 +24,55 @@ class UserRegistrationFacade
 	) {
 	}
 
-    /**
-     * @throws DuplicateEmailException
-     * @throws \Exception
-     */
-    public function register(RegistrationData $data): User
-    {
-        if ($this->userRepository->findByEmail($data->email)) {
-            throw new DuplicateEmailException("Email {$data->email} already exists.");
-        }
+	/**
+	 * @throws DuplicateEmailException
+	 * @throws \Exception
+	 */
+	public function register(RegistrationData $data): User
+	{
+		if ($this->userRepository->findByEmail($data->email)) {
+			throw new DuplicateEmailException("Email {$data->email} already exists.");
+		}
 
-        $passwordHash = $this->passwordService->hash($data->password);
-        $user = new User($data->email, $passwordHash);
+		$passwordHash = $this->passwordService->hash($data->password);
+		$user = new User($data->email, $passwordHash);
 
-        $em = $this->userRepository->getEntityManager();
-        $em->beginTransaction();
+		$em = $this->userRepository->getEntityManager();
+		$em->beginTransaction();
 
-        try {
-            $this->userRepository->save($user);
+		try {
+			$this->userRepository->save($user);
 
-            $profile = new UserProfile($user);
-            $profile->firstName = $data->firstName;
-            $profile->lastName = $data->lastName;
-            $em->persist($profile);
+			$profile = new UserProfile($user);
+			$profile->firstName = $data->firstName;
+			$profile->lastName = $data->lastName;
+			$em->persist($profile);
 
-            $address = new Address(
-                $user,
-                AddressType::Billing,
-                $data->street,
-                $data->city,
-                $data->zip
-            );
-            $this->addressRepository->save($address);
+			$address = new Address(
+				$user,
+				AddressType::Billing,
+				$data->street,
+				$data->city,
+				$data->zip
+			);
+			$this->addressRepository->save($address);
 
-            $em->commit();
-        } catch (\Exception $e) {
-            $em->rollback();
-            throw $e;
-        }
+			$em->commit();
+		} catch (\Exception $e) {
+			$em->rollback();
+
+			throw $e;
+		}
 
 
-        try {
-            $this->newUserMailer->send($user);
-        } catch (\Exception $e) {
-            bdump('Cant send email: ' . $e->getMessage());
-            throw $e;
-        }
+		try {
+			$this->newUserMailer->send($user);
+		} catch (\Exception $e) {
+			bdump('Cant send email: ' . $e->getMessage());
 
-        return $user;
-    }
+			throw $e;
+		}
+
+		return $user;
+	}
 }

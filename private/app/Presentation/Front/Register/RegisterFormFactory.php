@@ -14,11 +14,12 @@ use stdClass;
 
 class RegisterFormFactory
 {
+	/** @var array<callable> */
 	public array $onSuccess = [];
 
 	public function __construct(
 		private UserRegistrationFacade $registrationFacade,
-        private FormFactory $formFactory,
+		private FormFactory $formFactory,
 	) {
 	}
 

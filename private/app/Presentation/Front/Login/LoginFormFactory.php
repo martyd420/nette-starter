@@ -12,11 +12,12 @@ use stdClass;
 
 class LoginFormFactory
 {
+	/** @var array<callable> */
 	public array $onSuccess = [];
 
 	public function __construct(
 		private Nette\Security\User $user,
-        private FormFactory $formFactory,
+		private FormFactory $formFactory,
 	) {
 	}
 
@@ -35,8 +36,8 @@ class LoginFormFactory
 			try {
 				$this->user->login($data->email, $data->password);
 			} catch (UserBannedException $e) {
-                $form->addError('strings.user_banned');
-            } catch (Nette\Security\AuthenticationException $e) {
+				$form->addError('strings.user_banned');
+			} catch (Nette\Security\AuthenticationException $e) {
 				$form->addError('strings.invalid_credentials');
 			}
 		};

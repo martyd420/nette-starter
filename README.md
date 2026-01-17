@@ -14,7 +14,7 @@ This project comes pre-configured with **[Bootstrap 5](https://github.com/twbs/b
 - **AJAX**: AJAX support via [Naja](https://naja.js.org/).
 - **Translations**: Multi-language support (EN, CS) using [contributte/translation](https://github.com/contributte/translation).
 - **Assets**: Nette assets support with [Vite](https://github.com/vitejs/vite).
-- **Tools**: PHPStan for static analysis, Nette Tester for testing, and Tracy for debugging.
+- **Tools**: PHP-CS-Fixer for code style, PHPStan for static analysis, Nette Tester for testing, and Tracy for debugging.
 - **CLI**: Console support via [contributte/console](https://github.com/contributte/console).
 
 ## Project Structure
@@ -104,6 +104,8 @@ The `composer db:reset` command creates a default administrator account - **deve
 Defined in `composer.json`:
 
 - `composer db:reset`: **Destructive!** Drops the database schema, clears cache, creates new schema, and loads fixtures.
+- `composer cs:check`: Checks code style with PHP-CS-Fixer (dry-run).
+- `composer cs:fix`: Automatically fixes code style with PHP-CS-Fixer.
 - `composer phpstan`: Runs static analysis on `private/app`.
 - `composer tester`: Runs unit/integration tests.
 - `php private/cli/console.php`: Access to various Doctrine and system commands.

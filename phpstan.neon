@@ -1,8 +1,9 @@
 includes:
 	- private/vendor/phpstan/phpstan-nette/extension.neon
+	- private/vendor/phpstan/phpstan-doctrine/extension.neon
 
 parameters:
 	scanDirectories:
 		- private/app
 
-	level: 5
+	level: 8
