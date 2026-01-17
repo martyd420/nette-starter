@@ -5,4 +5,4 @@ private/log/*
 node_modules
 web/assets
 composer.lock
-package-lock.jsonpackage-lock.json
+package-lock.json
