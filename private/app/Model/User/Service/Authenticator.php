@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Model\User\Service;
 
+use App\Core\Logger\DatabaseLogger;
 use App\Model\User\Exception\UserBannedException;
 use App\Model\User\Enum\UserStatus;
 use App\Model\User\Repository\UserRepository;
@@ -16,6 +17,7 @@ class Authenticator implements IAuthenticator
 	public function __construct(
 		private UserRepository $userRepository,
 		private PasswordService $passwordService,
+        private DatabaseLogger $logger,
 	) {
 	}
 
@@ -28,6 +30,7 @@ class Authenticator implements IAuthenticator
 		}
 
 		if (!$this->passwordService->verify($password, $userEntity->passwordHash)) {
+            $this->logger->notice("User {$userEntity->id} failed to login.");
 			throw new AuthenticationException('Neplatné heslo.', self::InvalidCredential);
 		}
 
@@ -37,6 +40,8 @@ class Authenticator implements IAuthenticator
 
         bdump($userEntity->roles);
 		$roles = array_map(fn($role) => $role, $userEntity->roles);
+
+        $this->logger->info("User {$userEntity->id} logged in.");
 
 		return new SimpleIdentity(
 			$userEntity->id ?? 0,
