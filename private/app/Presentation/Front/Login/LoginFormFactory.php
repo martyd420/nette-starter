@@ -34,11 +34,11 @@ class LoginFormFactory
 		$form->onSuccess[] = function (Form $form, stdClass $data): void {
 			try {
 				$this->user->login($data->email, $data->password);
-			} catch (Nette\Security\AuthenticationException $e) {
-				$form->addError('strings.invalid_credentials');
 			} catch (UserBannedException $e) {
                 $form->addError('strings.user_banned');
-            }
+            } catch (Nette\Security\AuthenticationException $e) {
+				$form->addError('strings.invalid_credentials');
+			}
 		};
 
 		return $form;
