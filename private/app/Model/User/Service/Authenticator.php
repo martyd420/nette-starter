@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Model\User\Service;
 
 use App\Core\Logger\DatabaseLogger;
-use App\Model\User\Exception\UserBannedException;
 use App\Model\User\Enum\UserStatus;
+use App\Model\User\Exception\UserBannedException;
 use App\Model\User\Repository\UserRepository;
 use Nette\Security\Authenticator as IAuthenticator;
 use Nette\Security\SimpleIdentity;
@@ -21,7 +21,11 @@ class Authenticator implements IAuthenticator
 	) {
 	}
 
-	public function authenticate(string $user, string $password): SimpleIdentity
+    /**
+     * @throws AuthenticationException
+     * @throws UserBannedException
+     */
+    public function authenticate(string $user, string $password): SimpleIdentity
 	{
 		$userEntity = $this->userRepository->findByEmail($user);
 
@@ -35,10 +39,9 @@ class Authenticator implements IAuthenticator
 		}
 
 		if ($userEntity->status === UserStatus::Banned) {
-			throw new AuthenticationException('Uživatel má zakázaný přístup.', self::NotApproved);
+			throw new UserBannedException('Uživatel má zakázaný přístup.', self::NotApproved);
 		}
 
-        bdump($userEntity->roles);
 		$roles = array_map(fn($role) => $role, $userEntity->roles);
 
         $this->logger->info("User {$userEntity->id} logged in.");
