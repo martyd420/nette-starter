@@ -25,9 +25,9 @@ class Authenticator implements IAuthenticator
      * @throws AuthenticationException
      * @throws UserBannedException
      */
-    public function authenticate(string $user, string $password): SimpleIdentity
+    public function authenticate(string $username, string $password): SimpleIdentity
 	{
-		$userEntity = $this->userRepository->findByEmail($user);
+		$userEntity = $this->userRepository->findByEmail($username);
 
 		if (!$userEntity) {
 			throw new AuthenticationException('Uživatel nenalezen.', self::IdentityNotFound);
