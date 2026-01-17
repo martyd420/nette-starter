@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Model\Factory;
 
-use Nette\Mail\IMailer;
+use Nette\Mail\Mailer;
 use Nette\Mail\SmtpMailer;
 use Nette\Mail\SendmailMailer;
 use Nette\SmartObject;
@@ -18,10 +18,10 @@ class MailerFactory
 	) {
 	}
 
-	public function create(): IMailer
+	public function create(): Mailer
 	{
 		if ($this->config['developmentMode'] && $this->config['sendEmailsInDevMode'] === false) {
-			return new class implements IMailer {
+			return new class implements Mailer {
 				public function send(\Nette\Mail\Message $mail): void
 				{
 					// do nothing in development mode
