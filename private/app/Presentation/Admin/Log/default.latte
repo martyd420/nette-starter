@@ -1,0 +1,29 @@
+{* private/app/Presentation/Admin/Log/default.latte *}
+{block content}
+	<div class="page-header d-print-none">
+		<div class="container-xl">
+			<div class="row g-2 align-items-center">
+				<div class="col">
+					<h1 class="page-title">System logs</h1>
+				</div>
+				<div class="col-auto ms-auto d-print-none">
+					<div class="btn-list">
+						<a n:href="deleteOld!" class="btn btn-danger d-none d-sm-inline-block" onclick="return confirm('Opravdu chcete smazat logy starší než 30 dnů?')">
+							<i class="bi bi-trash"></i> Delete logs older than 30 days
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<main id="content" class="page-body">
+		<div class="container-xl">
+			<div class="card">
+				<div class="table-responsive">
+					{control logGrid}
+				</div>
+			</div>
+		</div>
+	</main>
+{/block}
