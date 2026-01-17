@@ -165,10 +165,10 @@ final class UsersPresenter extends BaseAdminPresenter
 		$form = $this->formFactory->create();
 		$form->setRenderer(new BootstrapRenderer());
 
-		$form->addText('name', 'First Name');
-		$form->addText('random', 'Random number');
+		$form->addText('name', 'First Name')->setRequired('First Name is required');
+		$form->addInteger('random', 'Random number');
 		$form->addSelect('role', 'Lorem', ['Lorem ipsum', 'Lorem Lorem ipsum']);
-		$form->addInteger('lorem', 'I Accept Lorem ipsum dolor sit amet');
+		$form->addTextArea('lorem', 'Textarea');
 		$form->addCheckbox('dolor', 'I Lorem dolor only')->setDefaultValue(true);
 		$form->addRadioList('radio', 'Select option', ['Lorem ipsum', 'Lorem Lorem ipsum'])->setDefaultValue(0);
 		$form->addSubmit('send', 'Send');
