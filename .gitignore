@@ -4,6 +4,4 @@ private/temp/*
 private/log/*
 node_modules
 web/assets
-composer.lock
-package-lock.json
 private/config/local.neon
