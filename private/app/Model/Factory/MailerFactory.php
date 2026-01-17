@@ -29,7 +29,7 @@ class MailerFactory
 			};
 		}
 
-		if (isset($this->config['smtp']['host']) && $this->config['smtp']['host'] !== null) {
+		if (isset($this->config['smtp']['host'])) {
 			return new SmtpMailer(...$this->config['smtp']);
 		}
 
