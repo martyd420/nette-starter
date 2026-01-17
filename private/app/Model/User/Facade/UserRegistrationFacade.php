@@ -11,6 +11,7 @@ use App\Model\User\Enum\AddressType;
 use App\Model\User\Exception\DuplicateEmailException;
 use App\Model\User\Repository\AddressRepository;
 use App\Model\User\Repository\UserRepository;
+use App\Model\User\Service\NewUserMailer;
 use App\Model\User\Service\PasswordService;
 
 class UserRegistrationFacade
@@ -19,13 +20,14 @@ class UserRegistrationFacade
 		private UserRepository $userRepository,
 		private AddressRepository $addressRepository,
 		private PasswordService $passwordService,
+		private NewUserMailer $newUserMailer,
 	) {
 	}
 
 	public function register(RegistrationData $data): User
 	{
 		if ($this->userRepository->findByEmail($data->email)) {
-			throw new DuplicateEmailException("Email {$data->email} již existuje.");
+			throw new DuplicateEmailException("Email {$data->email} already exists.");
 		}
 
 		$passwordHash = $this->passwordService->hash($data->password);
@@ -51,7 +53,10 @@ class UserRegistrationFacade
 			$this->addressRepository->save($address);
 			
 			$this->userRepository->getEntityManager()->commit();
+			
+			$this->newUserMailer->send($user);
 		} catch (\Exception $e) {
+            bdump($e->getMessage());
 			$this->userRepository->getEntityManager()->rollback();
 			throw $e;
 		}
