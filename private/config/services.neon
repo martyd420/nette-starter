@@ -9,3 +9,4 @@ search:
 			- *Factory
 			- *Repository
 			- *Service
+			- *Mailer

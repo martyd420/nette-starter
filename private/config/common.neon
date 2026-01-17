@@ -1,6 +1,15 @@
 # see https://doc.nette.org/en/configuring
 
 parameters:
+	mailer:
+		from: 'info@example.com'
+		developmentMode: %debugMode%
+		sendEmailsInDevMode: false
+		smtp:
+			host: null
+			username: null
+			password: null
+			encryption: null
 
 session:
 	autoStart: always
@@ -39,6 +48,7 @@ di:
 		tags: no
 
 services:
+	- App\Model\Factory\MailerFactory(%mailer%)
 	- App\Model\User\Repository\UserRepository
 	- App\Model\User\Repository\AddressRepository
 	- App\Model\User\Service\PasswordService
