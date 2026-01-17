@@ -1,8 +1,9 @@
 parameters:
 	mailer:
+		from: 'user@example.com'
 		smtp:
 			host: 'smtp.example.com'
-			username: 'user'
+			username: 'user@example.com'
 			password: 'password'
 			secure: 'ssl'
 
