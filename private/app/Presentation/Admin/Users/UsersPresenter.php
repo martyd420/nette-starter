@@ -160,6 +160,7 @@ final class UsersPresenter extends BaseAdminPresenter
 		return $this->usersGridFactory->create();
 	}
 
+	/* Bootstrap Renderers Examples ***********************************************************************************/
 	protected function createComponentBootstrapForm(): Form
 	{
 		$form = $this->formFactory->create();
@@ -188,7 +189,7 @@ final class UsersPresenter extends BaseAdminPresenter
 		$form->addSelect('role', 'Lorem', ['Lorem ipsum', 'Lorem Lorem ipsum']);
 		$form->addCheckbox('remember', 'This is a checkbox. Dolor ipsum lorem!')->setDefaultValue(true);
 		$form->addRadioList('radio', 'Select option', ['Lorem ipsum', 'Lorem Lorem ipsum', 'Other'])
-            ->setDefaultValue(1);
+			->setDefaultValue(1);
 		$form->addSubmit('send', 'Send');
 
 
