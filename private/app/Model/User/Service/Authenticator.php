@@ -39,6 +39,7 @@ class Authenticator implements IAuthenticator
 		}
 
 		if ($userEntity->status === UserStatus::Banned) {
+            $this->logger->notice("User {$userEntity->id} is banned, login cancelled.");
 			throw new UserBannedException('Uživatel má zakázaný přístup.', self::NotApproved);
 		}
 

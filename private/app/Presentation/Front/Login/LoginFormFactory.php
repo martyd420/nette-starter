@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Presentation\Front\Login;
 
 use App\Model\Factory\FormFactory;
+use App\Model\User\Exception\UserBannedException;
 use Nette;
 use Nette\Application\UI\Form;
 use stdClass;
@@ -35,7 +36,9 @@ class LoginFormFactory
 				$this->user->login($data->email, $data->password);
 			} catch (Nette\Security\AuthenticationException $e) {
 				$form->addError('strings.invalid_credentials');
-			}
+			} catch (UserBannedException $e) {
+                $form->addError('strings.user_banned');
+            }
 		};
 
 		return $form;
