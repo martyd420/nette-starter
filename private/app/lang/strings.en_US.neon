@@ -14,3 +14,4 @@ invalid_credentials: "Invalid login credentials."
 login_success: "You have successfully logged in."
 register_success: "Registration was successful. You can now log in."
 logout_success: "You have been logged out."
+user_banned: User banned.

@@ -14,3 +14,4 @@ invalid_credentials: "Neplatné přihlašovací údaje."
 login_success: "Byl jste úspěšně přihlášen."
 register_success: "Registrace byla úspěšná. Nyní se můžete přihlásit."
 logout_success: "Byl jste odhlášen."
+user_banned: Uživatel zablokován.
