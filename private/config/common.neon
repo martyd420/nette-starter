@@ -58,6 +58,7 @@ services:
 	- App\Model\User\Facade\UserAdminFacade
 	- App\Model\Factory\DatagridFactory()
 	- App\Model\Fixtures\UserFixture
+	- App\Core\Logger\DatabaseLogger
 
 extensions:
 	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
