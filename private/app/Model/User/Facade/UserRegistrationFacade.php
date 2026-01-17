@@ -24,43 +24,53 @@ class UserRegistrationFacade
 	) {
 	}
 
-	public function register(RegistrationData $data): User
-	{
-		if ($this->userRepository->findByEmail($data->email)) {
-			throw new DuplicateEmailException("Email {$data->email} already exists.");
-		}
+    /**
+     * @throws DuplicateEmailException
+     * @throws \Exception
+     */
+    public function register(RegistrationData $data): User
+    {
+        if ($this->userRepository->findByEmail($data->email)) {
+            throw new DuplicateEmailException("Email {$data->email} already exists.");
+        }
 
-		$passwordHash = $this->passwordService->hash($data->password);
-		$user = new User($data->email, $passwordHash);
-		
-		// V reálné aplikaci by zde byla transakce
-		$this->userRepository->getEntityManager()->beginTransaction();
-		try {
-			$this->userRepository->save($user);
+        $passwordHash = $this->passwordService->hash($data->password);
+        $user = new User($data->email, $passwordHash);
 
-			$profile = new UserProfile($user);
-			$profile->firstName = $data->firstName;
-			$profile->lastName = $data->lastName;
-			$this->userRepository->getEntityManager()->persist($profile);
+        $em = $this->userRepository->getEntityManager();
+        $em->beginTransaction();
 
-			$address = new Address(
-				$user,
-				AddressType::Billing,
-				$data->street,
-				$data->city,
-				$data->zip
-			);
-			$this->addressRepository->save($address);
-			
-			$this->userRepository->getEntityManager()->commit();
-			
-			$this->newUserMailer->send($user);
-		} catch (\Exception $e) {
-            bdump($e->getMessage());
-			$this->userRepository->getEntityManager()->rollback();
-			throw $e;
-		}
+        try {
+            $this->userRepository->save($user);
 
-		return $user;
-	}
+            $profile = new UserProfile($user);
+            $profile->firstName = $data->firstName;
+            $profile->lastName = $data->lastName;
+            $em->persist($profile);
+
+            $address = new Address(
+                $user,
+                AddressType::Billing,
+                $data->street,
+                $data->city,
+                $data->zip
+            );
+            $this->addressRepository->save($address);
+
+            $em->commit();
+        } catch (\Exception $e) {
+            $em->rollback();
+            throw $e;
+        }
+
+
+        try {
+            $this->newUserMailer->send($user);
+        } catch (\Exception $e) {
+            bdump('Cant send email: ' . $e->getMessage());
+            throw $e;
+        }
+
+        return $user;
+    }
 }
