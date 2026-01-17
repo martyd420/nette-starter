@@ -11,7 +11,7 @@ export default defineConfig({
     resolve: {
         alias: {
             '@contributte/datagrid/assets': path.resolve(__dirname, 'node_modules/@contributte/datagrid/assets'),
-            '@contributte/datagrid@contributte/datagrid': path.resolve(__dirname, 'node_modules/@contributte/datagrid/assets/index.ts'),
+            '@contributte/datagrid': path.resolve(__dirname, 'node_modules/@contributte/datagrid/assets/index.ts'),
             '@': path.resolve(__dirname, 'private/assets'),
         }
     },
