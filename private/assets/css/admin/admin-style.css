@@ -19,3 +19,53 @@
     vertical-align: middle;
     margin-top: -2px;
 }
+
+
+/* nette forms popup dialog */
+dialog.netteFormsModal {
+    border: none !important;
+    padding: 2rem !important;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    font-family: var(--tblr-font-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif), serif;
+    color: #232e3c;
+    font-size: 1rem;
+    line-height: 1.5;
+    max-width: 500px;
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+dialog.netteFormsModal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+dialog.netteFormsModal button {
+    border: 1px solid transparent;
+    background-color: #206bc4;
+    color: #ffffff;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 0.625rem 1.5rem !important;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    margin-top: 1rem;
+}
+
+dialog.netteFormsModal button:hover {
+    background-color: #1a569d;
+    border-color: #195296;
+}
+
+dialog.netteFormsModal button:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(32, 107, 196, 0.25);
+}
