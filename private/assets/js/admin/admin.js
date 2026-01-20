@@ -8,6 +8,7 @@ import '@/css/admin/admin-style.css';
 import netteForms from 'nette-forms';
 
 document.addEventListener('DOMContentLoaded', () => {
+    naja.formsHandler.netteForms = netteForms;
     naja.initialize({ history: false });
     createFullDatagrids(new NajaAjax(naja));
     netteForms.initOnLoad();
