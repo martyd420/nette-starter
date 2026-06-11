@@ -54,6 +54,7 @@ extensions:
 	nettrine.dbal: Nettrine\DBAL\DI\DbalExtension(%debugMode%)
 	nettrine.orm: Nettrine\ORM\DI\OrmExtension
 	nettrine.fixtures: Nettrine\Fixtures\DI\FixturesExtension
+	nettrine.migrations: Nettrine\Migrations\DI\MigrationsExtension
 	translation: Contributte\Translation\DI\TranslationExtension
 	orisai.tracyPets: OriNette\TracyPets\DI\TracyPetsExtension
 
@@ -82,6 +83,10 @@ nettrine.dbal:
 			user: %database.user%
 			password: %database.password%
 			charset: UTF8MB4
+
+nettrine.migrations:
+	directories:
+		App\Migrations: %appDir%/../migrations
 
 nettrine.orm:
 	managers:
