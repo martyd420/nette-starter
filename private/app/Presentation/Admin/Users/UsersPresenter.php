@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Presentation\Admin\Users;
 
 use App\Model\Factory\FormFactory;
+use App\Model\User\Entity\Address;
 use App\Model\User\Entity\User;
 use App\Model\User\Enum\UserRole;
 use App\Model\User\Enum\UserStatus;
@@ -103,15 +104,14 @@ final class UsersPresenter extends BaseAdminPresenter
 
 	protected function createComponentAddressForm(): Form
 	{
-		$userId = $this->editedUser ? $this->editedUser->id : null;
-		$form = $this->addressFormFactory->create($userId, $this->editedAddressId);
-
-		$this->addressFormFactory->onSave[] = function ($address) {
-			$this->flashMessage('Address saved', 'success');
-			$this->redirect('edit', ['id' => $address->user->id]);
-		};
-
-		return $form;
+		return $this->addressFormFactory->create(
+			$this->editedUser?->id,
+			$this->editedAddressId,
+			function (Address $address): void {
+				$this->flashMessage('Address saved', 'success');
+				$this->redirect('edit', ['id' => $address->user->id]);
+			},
+		);
 	}
 
 	protected function createComponentUserForm(): Form

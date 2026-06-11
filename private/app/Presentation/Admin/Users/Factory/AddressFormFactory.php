@@ -13,16 +13,19 @@ use stdClass;
 
 class AddressFormFactory
 {
-	/** @var array<callable> */
-	public array $onSave = [];
-
 	public function __construct(
 		private AddressRepository $addressRepository,
-		private UserRepository $userRepository
+		private UserRepository $userRepository,
 	) {
 	}
 
-	public function create(?int $userId = null, ?int $addressId = null): Form
+	/**
+	 * The owning user and the edited address are fixed server-side;
+	 * they must not come from the submitted form data.
+	 *
+	 * @param callable(Address): void $onSave
+	 */
+	public function create(?int $userId, ?int $addressId, callable $onSave): Form
 	{
 		$form = new Form();
 
@@ -43,12 +46,9 @@ class AddressFormFactory
 			->setDefaultValue('CZ')
 			->setRequired('Country is required');
 
-		$form->addHidden('userId', (string)$userId);
-		$form->addHidden('addressId', (string)$addressId);
-
 		$form->addSubmit('save', 'Save Address');
 
-		if ($addressId) {
+		if ($addressId !== null) {
 			$address = $this->addressRepository->getById($addressId);
 			if ($address) {
 				$form->setDefaults([
@@ -57,61 +57,55 @@ class AddressFormFactory
 					'city' => $address->city,
 					'zip' => $address->zip,
 					'country' => $address->country,
-					'addressId' => $address->id,
-					'userId' => $address->user->id,
 				]);
 			}
 		}
 
-		$form->onSuccess[] = function (Form $form, stdClass $values) {
-			$this->processForm($form, $values);
+		$form->onSuccess[] = function (Form $form, stdClass $values) use ($userId, $addressId, $onSave): void {
+			$address = $this->processForm($form, $values, $userId, $addressId);
+			if ($address) {
+				$onSave($address);
+			}
 		};
 
 		return $form;
 	}
 
-	public function onSave(Address $address): void
+	private function processForm(Form $form, stdClass $values, ?int $userId, ?int $addressId): ?Address
 	{
-		foreach ($this->onSave as $callback) {
-			$callback($address);
-		}
-	}
-
-	private function processForm(Form $form, stdClass $values): void
-	{
-		if ($values->addressId) {
-			$address = $this->addressRepository->getById((int)$values->addressId);
+		if ($addressId !== null) {
+			$address = $this->addressRepository->getById($addressId);
 			if (!$address) {
 				$form->addError('Address not found');
 
-				return;
+				return null;
 			}
+
+			$address->type = AddressType::from($values->type);
+			$address->street = $values->street;
+			$address->city = $values->city;
+			$address->zip = $values->zip;
+			$address->country = $values->country;
 		} else {
-			$user = $this->userRepository->getById((int)$values->userId);
+			$user = $userId !== null ? $this->userRepository->getById($userId) : null;
 			if (!$user) {
 				$form->addError('User not found');
 
-				return;
+				return null;
 			}
-			// Create dummy first, attributes will be overwritten
+
 			$address = new Address(
 				$user,
 				AddressType::from($values->type),
 				$values->street,
 				$values->city,
 				$values->zip,
-				$values->country
+				$values->country,
 			);
 		}
 
-		$address->type = AddressType::from($values->type);
-		$address->street = $values->street;
-		$address->city = $values->city;
-		$address->zip = $values->zip;
-		$address->country = $values->country;
-
 		$this->addressRepository->save($address);
 
-		$this->onSave($address);
+		return $address;
 	}
 }
