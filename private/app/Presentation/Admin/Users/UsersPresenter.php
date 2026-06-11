@@ -8,7 +8,9 @@ use App\Model\Factory\FormFactory;
 use App\Model\User\Entity\User;
 use App\Model\User\Enum\UserRole;
 use App\Model\User\Enum\UserStatus;
+use App\Model\User\Exception\UserNotFoundException;
 use App\Model\User\Facade\UserAdminFacade;
+use App\Model\User\Facade\UserUpdateData;
 use App\Model\User\Factory\UsersGridFactory;
 use App\Model\User\Repository\AddressRepository;
 use App\Model\User\Repository\UserRepository;
@@ -146,13 +148,24 @@ final class UsersPresenter extends BaseAdminPresenter
 			return;
 		}
 
+		$data = new UserUpdateData(
+			email: $values->email,
+			role: UserRole::from($values->role),
+			status: UserStatus::from($values->status),
+			firstName: $values->firstName,
+			lastName: $values->lastName,
+		);
+
 		try {
-			$this->userAdminFacade->updateUser($this->editedUser->id, (array) $values);
-			$this->flashMessage('User updated', 'success');
-			$this->redirect('default');
-		} catch (\Exception $e) {
+			$this->userAdminFacade->updateUser($this->editedUser->id, $data);
+		} catch (UserNotFoundException $e) {
 			$form->addError($e->getMessage());
+
+			return;
 		}
+
+		$this->flashMessage('User updated', 'success');
+		$this->redirect('default');
 	}
 
 	public function createComponentUsersGrid(): Datagrid

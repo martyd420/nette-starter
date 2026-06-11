@@ -31,19 +31,19 @@ class Authenticator implements IAuthenticator
 		$userEntity = $this->userRepository->findByEmail($username);
 
 		if (!$userEntity) {
-			throw new AuthenticationException('Uživatel nenalezen.', self::IdentityNotFound);
+			throw new AuthenticationException('User not found.', self::IdentityNotFound);
 		}
 
 		if (!$this->passwordService->verify($password, $userEntity->passwordHash)) {
 			$this->logger->notice("User {$userEntity->id} failed to login.");
 
-			throw new AuthenticationException('Neplatné heslo.', self::InvalidCredential);
+			throw new AuthenticationException('Invalid password.', self::InvalidCredential);
 		}
 
 		if ($userEntity->status === UserStatus::Banned) {
 			$this->logger->notice("User {$userEntity->id} is banned, login cancelled.");
 
-			throw new UserBannedException('Uživatel má zakázaný přístup.', self::NotApproved);
+			throw new UserBannedException('User is banned.', self::NotApproved);
 		}
 
 		$this->logger->info("User {$userEntity->id} logged in.");

@@ -6,7 +6,7 @@ require __DIR__ . '/private/vendor/autoload.php';
 $path = $argv[1] ?? 'app';
 
 $bootstrap = new App\Bootstrap;
-$container = $bootstrap->bootForCLI();
+$container = $bootstrap->boot();
 $latte = $container->getByType(Nette\Bridges\ApplicationLatte\TemplateFactory::class)
 	->createTemplate()
 	->getLatte();

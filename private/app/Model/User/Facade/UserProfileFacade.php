@@ -21,10 +21,4 @@ class UserProfileFacade
 		$user->passwordHash = $this->passwordService->hash($newPassword);
 		$this->userRepository->save($user);
 	}
-
-	/** @param array<string, mixed> $data */
-	public function updateProfile(User $user, array $data): void
-	{
-		// Logika pro aktualizaci profilu a adres
-	}
 }

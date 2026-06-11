@@ -5,6 +5,6 @@ declare(strict_types=1);
 require __DIR__ . '/../private/vendor/autoload.php';
 
 $bootstrap = new App\Bootstrap;
-$container = $bootstrap->bootWebApplication();
+$container = $bootstrap->boot();
 $application = $container->getByType(Nette\Application\Application::class);
 $application->run();

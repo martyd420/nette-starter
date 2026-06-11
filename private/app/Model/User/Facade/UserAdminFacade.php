@@ -7,8 +7,8 @@ namespace App\Model\User\Facade;
 use App\Model\User\Entity\User;
 use App\Model\User\Entity\UserGroup;
 use App\Model\User\Entity\UserProfile;
-use App\Model\User\Enum\UserRole;
 use App\Model\User\Enum\UserStatus;
+use App\Model\User\Exception\UserNotFoundException;
 use App\Model\User\Repository\UserRepository;
 
 class UserAdminFacade
@@ -18,26 +18,27 @@ class UserAdminFacade
 	) {
 	}
 
-	/** @param array<string, mixed> $data */
-	public function updateUser(int $id, array $data): void
+	/** @throws UserNotFoundException */
+	public function updateUser(int $id, UserUpdateData $data): void
 	{
 		$user = $this->userRepository->getById($id);
 		if (!$user) {
-			throw new \Exception("User not found");
+			throw new UserNotFoundException("User $id not found.");
 		}
 
-		$user->email = $data['email'];
-		$user->roles = [UserRole::from($data['role'])];
-		$user->status = UserStatus::from($data['status']);
+		$user->email = $data->email;
+		$user->roles = [$data->role];
+		$user->status = $data->status;
 
 		$profile = $user->getProfile();
 		if (!$profile) {
 			$profile = new UserProfile($user);
+			$user->setProfile($profile);
 			$this->userRepository->getEntityManager()->persist($profile);
 		}
 
-		$profile->firstName = $data['firstName'];
-		$profile->lastName = $data['lastName'];
+		$profile->firstName = $data->firstName;
+		$profile->lastName = $data->lastName;
 
 		$this->userRepository->save($user);
 	}
