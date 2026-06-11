@@ -55,6 +55,7 @@ extensions:
 	nettrine.orm: Nettrine\ORM\DI\OrmExtension
 	nettrine.fixtures: Nettrine\Fixtures\DI\FixturesExtension
 	nettrine.migrations: Nettrine\Migrations\DI\MigrationsExtension
+	events: Contributte\EventDispatcher\DI\EventDispatcherExtension
 	translation: Contributte\Translation\DI\TranslationExtension
 	orisai.tracyPets: OriNette\TracyPets\DI\TracyPetsExtension
 

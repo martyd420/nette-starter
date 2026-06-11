@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace App\Model\User\Facade;
 
-class RegistrationData
+final class RegistrationData
 {
-	public string $email;
-	public string $password;
-	public string $firstName;
-	public string $lastName;
-	public string $street;
-	public string $city;
-	public string $zip;
+	public function __construct(
+		public readonly string $email,
+		public readonly string $password,
+		public readonly string $firstName,
+		public readonly string $lastName,
+		public readonly string $street,
+		public readonly string $city,
+		public readonly string $zip,
+	) {
+	}
 }

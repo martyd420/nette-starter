@@ -50,18 +50,18 @@ class RegisterFormFactory
 		$form->addSubmit('send', 'forms.create_account');
 
 		$form->onSuccess[] = function (Form $form, stdClass $values): void {
+			$data = new RegistrationData(
+				email: $values->email,
+				password: $values->password,
+				firstName: $values->firstName,
+				lastName: $values->lastName,
+				street: $values->street,
+				city: $values->city,
+				zip: $values->zip,
+			);
+
 			try {
-				$data = new RegistrationData();
-				$data->email = $values->email;
-				$data->password = $values->password;
-				$data->firstName = $values->firstName;
-				$data->lastName = $values->lastName;
-				$data->street = $values->street;
-				$data->city = $values->city;
-				$data->zip = $values->zip;
-
 				$this->registrationFacade->register($data);
-
 			} catch (DuplicateEmailException $e) {
 				/** @var BaseControl $emailControl */
 				$emailControl = $form['email'];
