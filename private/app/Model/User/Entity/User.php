@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Model\User\Entity;
 
+use App\Model\User\Doctrine\UserRolesType;
 use App\Model\User\Enum\UserRole;
 use App\Model\User\Enum\UserStatus;
 use DateTimeImmutable;
@@ -27,7 +28,7 @@ class User
 	public string $passwordHash;
 
 	/** @var UserRole[] */
-	#[ORM\Column(type: 'json')]
+	#[ORM\Column(type: UserRolesType::Name)]
 	public array $roles = [];
 
 	#[ORM\Column(type: 'string', enumType: UserStatus::class)]

@@ -82,6 +82,9 @@ nettrine.dbal:
 	debug:
 		panel: %debugMode%
 
+	types:
+		user_roles: App\Model\User\Doctrine\UserRolesType
+
 	connections:
 		default:
 			host: localhost

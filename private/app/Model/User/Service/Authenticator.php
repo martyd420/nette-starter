@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Model\User\Service;
 
 use App\Core\Logger\DatabaseLogger;
+use App\Model\User\Enum\UserRole;
 use App\Model\User\Enum\UserStatus;
 use App\Model\User\Exception\UserBannedException;
 use App\Model\User\Repository\UserRepository;
@@ -45,13 +46,11 @@ class Authenticator implements IAuthenticator
 			throw new UserBannedException('Uživatel má zakázaný přístup.', self::NotApproved);
 		}
 
-		$roles = array_map(fn ($role) => $role, $userEntity->roles);
-
 		$this->logger->info("User {$userEntity->id} logged in.");
 
 		return new SimpleIdentity(
-			$userEntity->id ?? 0,
-			$roles,
+			$userEntity->id,
+			array_map(static fn (UserRole $role): string => $role->value, $userEntity->roles),
 			['email' => $userEntity->email]
 		);
 	}
