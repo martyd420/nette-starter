@@ -1,6 +1,9 @@
 services:
 	- App\Core\RouterFactory::createRouter
 
+	# Services needing explicit arguments; everything else is registered by search below.
+	- App\Model\Factory\MailerFactory(%mailer%)
+
 
 search:
 	- in: %appDir%
@@ -10,4 +13,5 @@ search:
 			- *Repository
 			- *Service
 			- *Mailer
-
+			- *Logger
+			- *Fixture

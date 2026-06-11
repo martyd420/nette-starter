@@ -1,6 +1,14 @@
 # see https://doc.nette.org/en/configuring
 
 parameters:
+	# Database credentials belong to local.neon (not committed),
+	# see local.neon.example. Defaults here only document the structure.
+	database:
+		host: localhost
+		dbname: nsdb
+		user: ''
+		password: ''
+
 	mailer:
 		from: 'info@example.com'
 		developmentMode: %debugMode%
@@ -23,12 +31,6 @@ application:
 		*: [App\Presentation, *, **Presenter]
 
 
-#database:
-#	dsn: 'sqlite::memory:'
-#	user:
-#	password:
-
-
 latte:
 	strictParsing: yes
 	extensions:
@@ -46,19 +48,6 @@ di:
 	export:
 		parameters: no
 		tags: no
-
-services:
-	- App\Model\Factory\MailerFactory(%mailer%)
-	- App\Model\User\Repository\UserRepository
-	- App\Model\User\Repository\AddressRepository
-	- App\Model\User\Service\PasswordService
-	- App\Model\User\Service\Authenticator
-	- App\Model\User\Facade\UserRegistrationFacade
-	- App\Model\User\Facade\UserProfileFacade
-	- App\Model\User\Facade\UserAdminFacade
-	- App\Model\Factory\DatagridFactory()
-	- App\Model\Fixtures\UserFixture
-	- App\Core\Logger\DatabaseLogger
 
 extensions:
 	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
@@ -87,12 +76,12 @@ nettrine.dbal:
 
 	connections:
 		default:
-			host: localhost
+			host: %database.host%
 			driver: pdo_mysql
-			dbname: nsdb
-			user: nettestarter
-			password: "nettestarter123"
-			charset:  UTF8MB4
+			dbname: %database.dbname%
+			user: %database.user%
+			password: %database.password%
+			charset: UTF8MB4
 
 nettrine.orm:
 	managers:
