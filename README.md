@@ -4,7 +4,8 @@ A web application skeleton built with **[Nette Framework](https://github.com/net
 This project comes pre-configured with **[Bootstrap 5](https://github.com/twbs/bootstrap)** and **[Tabler](https://github.com/tabler/tabler)** for a responsive administration UI.
 
 
-[![PHPStan](https://github.com/martyd420/nette-starter/actions/workflows/phpstan.yml/badge.svg)](https://github.com/martyd420/nette-starter/actions/workflows/phpstan.yml)
+&nbsp;&nbsp;[![PHPStan](https://github.com/martyd420/nette-starter/actions/workflows/phpstan.yml/badge.svg)](https://github.com/martyd420/nette-starter/actions/workflows/phpstan.yml)
+&nbsp;&nbsp;[![NPM Build](https://github.com/martyd420/nette-starter/actions/workflows/NPM%20Build.yml/badge.svg)](https://github.com/martyd420/nette-starter/actions/workflows/NPM%20Build.yml)
 
 ## Features
 
