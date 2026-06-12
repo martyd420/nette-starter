@@ -16,4 +16,9 @@ jobs:
       - run: composer install --prefer-dist --no-progress
       - run: composer cs:check
       - run: composer phpstan
-      - run: php ./latte-lint
+
+      - name: Latte Lint
+        run: |
+          mkdir -p private/log
+          mkdir -p private/temp
+          php ./latte-lint private/app
