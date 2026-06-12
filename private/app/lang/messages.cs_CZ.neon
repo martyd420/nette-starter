@@ -1,5 +1,3 @@
-"Please enter a valid email address.": "Zadejte platný email"
-language: Jazyk
-change_language: Změnit jazyk
-CZ: CZ
-EN: EN
+# Default translation domain: fallback for framework messages
+# (e.g. built-in form validation rules).
+"Please enter a valid email address.": "Zadejte prosím platnou e-mailovou adresu."

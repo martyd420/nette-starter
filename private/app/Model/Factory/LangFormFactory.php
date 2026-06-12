@@ -23,7 +23,7 @@ class LangFormFactory
 		])->setDefaultValue($currentLang)
 			->setHtmlAttribute('onchange', 'this.form.submit()');
 
-		$form->addSubmit('send', 'messages.change_language');
+		$form->addSubmit('send', 'forms.change_language');
 
 		$form->onSuccess[] = function (Form $form, \stdClass $data) use ($onSuccess): void {
 			$onSuccess($data->lang);

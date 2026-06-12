@@ -14,5 +14,4 @@ please_enter_city: Please enter city
 please_enter_zip: Please enter ZIP Code
 create_account: Create Account
 login: Sign In
-register: Sign Up
-no_account: "Don’t have an account?"
+change_language: Change language
