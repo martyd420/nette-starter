@@ -13,6 +13,7 @@ $finder = PhpCsFixer\Finder::create()
 $config = new PhpCsFixer\Config();
 return $config->setRules([
 	'@PSR12' => true,
+	'declare_strict_types' => true,
 	'indentation_type' => true,
 	'array_syntax' => ['syntax' => 'short'],
 	'ordered_imports' => ['sort_algorithm' => 'alpha'],
@@ -32,6 +33,7 @@ return $config->setRules([
 		'keep_multiple_spaces_after_comma' => true,
 	],
 ])
+	->setRiskyAllowed(true)
 	->setFinder($finder)
 	->setIndent("\t")
 	->setLineEnding("\n");
