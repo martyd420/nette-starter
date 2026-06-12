@@ -4,6 +4,8 @@ A web application skeleton built with **[Nette Framework](https://github.com/net
 This project comes pre-configured with **[Bootstrap 5](https://github.com/twbs/bootstrap)** and **[Tabler](https://github.com/tabler/tabler)** for a responsive administration UI.
 
 
+[![PHPStan](https://github.com/martyd420/nette-starter/actions/workflows/phpstan.yml/badge.svg)](https://github.com/martyd420/nette-starter/actions/workflows/phpstan.yml)
+
 ## Features
 
 - **Stack**: [Nette 3.2](https://github.com/nette/nette), PHP 8.2+, [Vite](https://github.com/vitejs/vite) (HMR + auto reload for Latte templates).
