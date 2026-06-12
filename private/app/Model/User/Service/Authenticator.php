@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Model\User\Service;
 
-use App\Core\Logger\DatabaseLogger;
 use App\Model\User\Enum\UserRole;
 use App\Model\User\Enum\UserStatus;
 use App\Model\User\Exception\UserBannedException;
@@ -12,13 +11,14 @@ use App\Model\User\Repository\UserRepository;
 use Nette\Security\AuthenticationException;
 use Nette\Security\Authenticator as IAuthenticator;
 use Nette\Security\SimpleIdentity;
+use Psr\Log\LoggerInterface;
 
 class Authenticator implements IAuthenticator
 {
 	public function __construct(
 		private UserRepository $userRepository,
 		private PasswordService $passwordService,
-		private DatabaseLogger $logger,
+		private LoggerInterface $logger,
 	) {
 	}
 

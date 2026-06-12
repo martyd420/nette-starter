@@ -12,6 +12,7 @@ search:
 			- *Factory
 			- *Repository
 			- *Service
+			- *Authenticator
 			- *Mailer
 			- *Logger
 			- *Fixture
