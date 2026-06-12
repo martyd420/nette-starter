@@ -30,7 +30,7 @@ and `composer tester`.** All three must be clean. PHPStan runs at level 8 with
 the Nette and Doctrine extensions, so keep types honest.
 
 Note: `composer` is configured with `vendor-dir: private/vendor`, so binaries
-live under `private/vendor/bin/`.
+live under `private/vendor/bin/` (directories structure from ISPConfig).
 
 ## Layout
 
