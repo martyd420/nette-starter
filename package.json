@@ -1,15 +1,12 @@
 {
   "name": "nette-starter",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
+  "description": "Frontend build (Vite) for the Nette Starter web application skeleton.",
+  "type": "module",
+  "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "vite build"
   },
   "repository": {
     "type": "git",
@@ -17,12 +14,11 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/martyd420/nette-starter/issues"
   },
   "homepage": "https://github.com/martyd420/nette-starter#readme",
-  "type": "module",
   "devDependencies": {
     "@nette/vite-plugin": "^1.0.2",
     "vite": "^6.0.0",

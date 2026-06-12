@@ -22,10 +22,11 @@ This project comes pre-configured with **[Bootstrap 5](https://github.com/twbs/b
 ## Project Structure
 
 - `private/app`: PHP application logic (Presenters, Models, Services).
-  - `Model`: Doctrine entities, repositories, and facades.
+  - `Model`: Doctrine entities, repositories, facades, and services.
   - `Presentation`: Latte templates and Nette presenters.
+  - `lang`: Translation files (NEON).
 - `private/config`: Configuration files (NEON).
-- `private/lang`: Translation files.
+- `private/migrations`: Doctrine migrations.
 - `private/assets`: Frontend source files (JS, CSS).
 - `web`: Public directory (entry point, compiled assets).
 - `tests`: Unit and integration tests.
