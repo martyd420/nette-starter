@@ -85,7 +85,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr n:foreach="$editedUser->getAddresses() as $address">
+                                    <tr n:foreach="$editedUser->addresses as $address">
                                         <td>{$address->type->value}</td>
                                         <td>{$address->street}</td>
                                         <td>{$address->city}</td>
@@ -95,7 +95,7 @@
                                             <a n:href="addressEdit id => $address->id" class="btn btn-secondary btn-sm">Edit</a>
                                         </td>
                                     </tr>
-                                    <tr n:if="$editedUser->getAddresses()->isEmpty()">
+                                    <tr n:if="$editedUser->addresses->isEmpty()">
                                         <td colspan="6" class="text-center text-muted">No addresses found</td>
                                     </tr>
                                 </tbody>

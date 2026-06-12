@@ -30,10 +30,10 @@ class UserAdminFacade
 		$user->roles = [$data->role];
 		$user->status = $data->status;
 
-		$profile = $user->getProfile();
+		$profile = $user->profile;
 		if (!$profile) {
 			$profile = new UserProfile($user);
-			$user->setProfile($profile);
+			$user->profile = $profile;
 			$this->userRepository->getEntityManager()->persist($profile);
 		}
 

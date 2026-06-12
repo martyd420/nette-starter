@@ -21,7 +21,7 @@ class UserTest extends \Tester\TestCase
 		$profile = new UserProfile($user);
 		$profile->firstName = 'John';
 		$profile->lastName = 'Doe';
-		$user->setProfile($profile);
+		$user->profile = $profile;
 
 		Assert::same('John Doe', $user->getName());
 	}

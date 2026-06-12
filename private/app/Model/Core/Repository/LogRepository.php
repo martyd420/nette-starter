@@ -19,6 +19,11 @@ class LogRepository
 		$this->repository = $this->entityManager->getRepository(Log::class);
 	}
 
+	public function getById(int $id): ?Log
+	{
+		return $this->repository->find($id);
+	}
+
 	public function save(Log $log): void
 	{
 		$this->entityManager->persist($log);

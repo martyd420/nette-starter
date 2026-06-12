@@ -21,30 +21,22 @@ use App\Presentation\Admin\BaseAdminPresenter;
 use App\Presentation\Admin\Users\Factory\AddressFormFactory;
 use Contributte\Datagrid\Datagrid;
 use Nette\Application\UI\Form;
-use Nette\DI\Attributes\Inject;
 
 final class UsersPresenter extends BaseAdminPresenter
 {
-	#[Inject]
-	public UsersGridFactory $usersGridFactory;
-
-	#[Inject]
-	public UserRepository $userRepository;
-
-	#[Inject]
-	public AddressRepository $addressRepository;
-
-	#[Inject]
-	public UserAdminFacade $userAdminFacade;
-
-	#[Inject]
-	public AddressFormFactory $addressFormFactory;
-
-	#[Inject]
-	public FormFactory $formFactory; // for bootstrap example
-
 	private ?User $editedUser = null;
 	private ?int $editedAddressId = null;
+
+	public function __construct(
+		private readonly UsersGridFactory $usersGridFactory,
+		private readonly UserRepository $userRepository,
+		private readonly AddressRepository $addressRepository,
+		private readonly UserAdminFacade $userAdminFacade,
+		private readonly AddressFormFactory $addressFormFactory,
+		private readonly FormFactory $formFactory, // for the Bootstrap renderer examples
+	) {
+		parent::__construct();
+	}
 
 	public function actionEdit(int $id): void
 	{
@@ -58,8 +50,8 @@ final class UsersPresenter extends BaseAdminPresenter
 			'email' => $this->editedUser->email,
 			'role' => $this->editedUser->roles[0]->value ?? null,
 			'status' => $this->editedUser->status->value,
-			'firstName' => $this->editedUser->getProfile()?->firstName,
-			'lastName' => $this->editedUser->getProfile()?->lastName,
+			'firstName' => $this->editedUser->profile?->firstName,
+			'lastName' => $this->editedUser->profile?->lastName,
 		]);
 	}
 

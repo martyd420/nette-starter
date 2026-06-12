@@ -39,7 +39,7 @@ class UserRegistrationFacade
 			$profile = new UserProfile($user);
 			$profile->firstName = $data->firstName;
 			$profile->lastName = $data->lastName;
-			$user->setProfile($profile);
+			$user->profile = $profile;
 			$em->persist($profile);
 
 			$em->persist(new Address($user, AddressType::Billing, $data->street, $data->city, $data->zip));

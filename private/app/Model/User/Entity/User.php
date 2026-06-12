@@ -42,17 +42,11 @@ class User
 	public ?UserGroup $group = null;
 
 	#[ORM\OneToOne(mappedBy: 'user', targetEntity: UserProfile::class)]
-	private ?UserProfile $profile = null;
-
-	public function setProfile(?UserProfile $profile): void
-	{
-		$this->profile = $profile;
-	}
+	public ?UserProfile $profile = null;
 
 	/** @var Collection<int, Address> */
 	#[ORM\OneToMany(mappedBy: 'user', targetEntity: Address::class, cascade: ['persist', 'remove'])]
-	private Collection $addresses;
-
+	public Collection $addresses;
 
 	public function __construct(string $email, string $passwordHash, UserRole $role = UserRole::Customer)
 	{
@@ -64,21 +58,8 @@ class User
 		$this->addresses = new ArrayCollection();
 	}
 
-	public function getProfile(): ?UserProfile
-	{
-		return $this->profile;
-	}
-
 	public function getName(): string
 	{
-		return $this->getProfile()?->firstName . ' ' . $this->getProfile()?->lastName;
+		return $this->profile?->firstName . ' ' . $this->profile?->lastName;
 	}
-
-	/** @return Collection<int, Address> */
-	public function getAddresses(): Collection
-	{
-		return $this->addresses;
-	}
-
-
 }
