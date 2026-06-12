@@ -1,4 +1,4 @@
-name: PHPStan
+name: PHPStan & CS
 
 on:
   push:
@@ -14,4 +14,6 @@ jobs:
           php-version: '8.4'
           coverage: none
       - run: composer install --prefer-dist --no-progress
+      - run: composer cs:check
       - run: composer phpstan
+      - run: php ./latte-lint
