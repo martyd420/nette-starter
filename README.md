@@ -6,7 +6,7 @@ This project comes pre-configured with **[Bootstrap 5](https://github.com/twbs/b
 
 &nbsp;&nbsp;[![PHPStan & CS](https://github.com/martyd420/nette-starter/actions/workflows/phpstan.yml/badge.svg)](https://github.com/martyd420/nette-starter/actions/workflows/phpstan.yml)
 &nbsp;&nbsp;[![NPM Build](https://github.com/martyd420/nette-starter/actions/workflows/NPM%20Build.yml/badge.svg)](https://github.com/martyd420/nette-starter/actions/workflows/NPM%20Build.yml)
-
+&nbsp;&nbsp;[![Nette Tester](https://github.com/martyd420/nette-starter/actions/workflows/Nette%20Tester.yml/badge.svg)](https://github.com/martyd420/nette-starter/actions/workflows/Nette%20Tester.yml)
 ## Features
 
 - **Stack**: [Nette 3.2](https://github.com/nette/nette), PHP 8.2+, [Vite](https://github.com/vitejs/vite) (HMR + auto reload for Latte templates).
