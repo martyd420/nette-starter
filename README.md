@@ -72,6 +72,59 @@ This project comes pre-configured with **[Bootstrap 5](https://github.com/twbs/b
    npm run build
    ```
 
+## Docker
+
+The repository ships with a Docker setup (Apache + mod_php, MySQL, Mailpit and a
+Vite dev server) so you can run the whole stack without installing PHP, Node or a
+database on the host. Only Docker and the Compose plugin are required.
+
+### Development
+
+1. **Point the app at the containers.** `private/config/local.neon` is already
+   configured for Docker (`database.host: db`, mail routed to Mailpit). The
+   previous host-based values are kept commented out in the same file.
+
+2. **Start the stack:**
+   ```bash
+   docker compose up --build
+   ```
+   On first start the `app` container installs the Composer dependencies
+   automatically. Services exposed on the host:
+
+   | Service | URL / port | Notes |
+   | --- | --- | --- |
+   | Application (Apache) | http://localhost:8080 | document root `web/` |
+   | Vite dev server (HMR) | http://localhost:5173 | started by the `node` service |
+   | Mailpit (caught mail) | http://localhost:8025 | SMTP on `1025` |
+   | MySQL 8 | `localhost:3306` | db `nsdb`, user `nettestarter` |
+
+3. **Initialize the database** (schema + fixtures) once the containers are up:
+   ```bash
+   docker compose exec -u www-data app composer db:reset
+   ```
+
+4. **Console / Composer commands** run inside the `app` container. Run anything
+   that writes to `private/temp` or `private/log` as `www-data` (the entrypoint
+   maps that user to your host UID, so generated files stay writable on both
+   sides):
+   ```bash
+   docker compose exec -u www-data app php private/cli/console.php migrations:migrate
+   docker compose exec -u www-data app composer phpstan
+   ```
+
+To enable Xdebug for a run, export `XDEBUG_MODE` (it listens on port `9003`):
+```bash
+XDEBUG_MODE=debug docker compose up
+```
+
+### Production image
+
+A self-contained production image (baked code, `composer install --no-dev`,
+pre-built assets, tuned opcache) is built via the override file:
+```bash
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+```
+
 ## Development
 
 ### 1. Start Frontend Server (Vite)

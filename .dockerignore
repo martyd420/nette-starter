@@ -1,0 +1,13 @@
+.git
+.github
+.idea
+.claude
+node_modules
+private/vendor
+private/temp/*
+private/log/*
+web/assets
+.php-cs-fixer.cache
+tests
+doc
+*.md
