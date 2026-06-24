@@ -17,20 +17,20 @@ services:
         condition: service_healthy
 
   db:
-    image: mysql:8
+    image: mariadb:lts
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: nsdb
-      MYSQL_USER: nettestarter
-      MYSQL_PASSWORD: nettestarter123
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: nsdb
+      MARIADB_USER: nettestarter
+      MARIADB_PASSWORD: nettestarter123
     ports:
-      # Host port 3307 avoids clashing with a MySQL already running on the host
+      # Host port 3307 avoids clashing with a database already running on the host
       - "3307:3306"
     volumes:
       - db-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 5s
       timeout: 5s
       retries: 10

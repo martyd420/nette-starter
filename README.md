@@ -74,7 +74,7 @@ This project comes pre-configured with **[Bootstrap 5](https://github.com/twbs/b
 
 ## Docker
 
-The repository ships with a Docker setup (Apache + mod_php, MySQL, Mailpit and a
+The repository ships with a Docker setup (Apache + mod_php, MariaDB, Mailpit and a
 Vite dev server) so you can run the whole stack without installing PHP, Node or a
 database on the host. Only Docker and the Compose plugin are required.
 
@@ -96,7 +96,7 @@ database on the host. Only Docker and the Compose plugin are required.
    | Application (Apache) | http://localhost:8080 | document root `web/` |
    | Vite dev server (HMR) | http://localhost:5173 | started by the `node` service |
    | Mailpit (caught mail) | http://localhost:8025 | SMTP on `1025` |
-   | MySQL 8 | `localhost:3306` | db `nsdb`, user `nettestarter` |
+   | MariaDB | `localhost:3307` | db `nsdb`, user `nettestarter` |
 
 3. **Initialize the database** (schema + fixtures) once the containers are up:
    ```bash
