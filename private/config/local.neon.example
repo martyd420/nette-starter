@@ -15,3 +15,21 @@ parameters:
 			username: 'user@example.com'
 			password: 'password'
 			secure: 'ssl'
+
+# --- Docker setup ---------------------------------------------------------
+# When running via docker-compose (see the Docker section in README.md), use the
+# service hostnames instead. Mailpit catches all outgoing mail (UI on :8025).
+#
+# parameters:
+# 	database:
+# 		host: db
+# 		dbname: nsdb
+# 		user: nettestarter
+# 		password: nettestarter123
+#
+# 	mailer:
+# 		from: 'info@example.com'
+# 		sendEmailsInDevMode: true
+# 		smtp:
+# 			host: mailpit
+# 			port: 1025
