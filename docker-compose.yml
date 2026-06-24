@@ -1,0 +1,56 @@
+services:
+  app:
+    build:
+      context: .
+      target: dev
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      # Export XDEBUG_MODE=debug to enable step debugging for a run
+      XDEBUG_MODE: "${XDEBUG_MODE:-off}"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: nsdb
+      MYSQL_USER: nettestarter
+      MYSQL_PASSWORD: nettestarter123
+    ports:
+      # Host port 3307 avoids clashing with a MySQL already running on the host
+      - "3307:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Catches all outgoing mail; web UI at http://localhost:8025
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+
+  # Vite dev server with HMR; assets are served from http://localhost:5173
+  node:
+    image: node:22-slim
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+
+volumes:
+  db-data:

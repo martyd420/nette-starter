@@ -1,0 +1,16 @@
+# Production override: builds the self-contained prod image (baked code,
+# composer --no-dev, compiled assets) and drops the dev-only services.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+services:
+  app:
+    build:
+      target: prod
+    volumes: []
+    environment:
+      XDEBUG_MODE: "off"
+
+  # Vite is a build-time tool only; no dev server in production.
+  node:
+    profiles:
+      - donotstart
