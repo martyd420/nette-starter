@@ -25,6 +25,10 @@ class BootstrapRenderer extends DefaultFormRenderer
 	public function render(Nette\Forms\Form $form, ?string $mode = null): string
 	{
 		foreach ($form->getControls() as $control) {
+			if (!$control instanceof Nette\Forms\Controls\BaseControl) {
+				continue;
+			}
+
 			if ($control instanceof Nette\Forms\Controls\Button) {
 				$control->getControlPrototype()->addClass(empty($usedPrimary) ? 'btn btn-primary' : 'btn btn-secondary');
 				$usedPrimary = true;

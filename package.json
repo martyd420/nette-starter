@@ -21,7 +21,7 @@
   "homepage": "https://github.com/martyd420/nette-starter#readme",
   "devDependencies": {
     "@nette/vite-plugin": "^1.0.2",
-    "vite": "^6.0.0",
+    "vite": "^8.3.8",
     "vite-plugin-full-reload": "^1.2.0"
   },
   "dependencies": {
