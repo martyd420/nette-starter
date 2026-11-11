@@ -14,7 +14,7 @@ parameters:
 			host: 'smtp.example.com'
 			username: 'user@example.com'
 			password: 'password'
-			secure: 'ssl'
+			encryption: 'ssl'
 
 # --- Docker setup ---------------------------------------------------------
 # When running via docker-compose (see the Docker section in README.md), use the
