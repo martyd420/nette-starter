@@ -50,7 +50,7 @@ class Authenticator implements IAuthenticator
 
 		return new SimpleIdentity(
 			$userEntity->id,
-			array_map(static fn (UserRole $role): string => $role->value, $userEntity->roles),
+			array_values(array_map(static fn (UserRole $role): string => $role->value, $userEntity->roles)),
 			['email' => $userEntity->email]
 		);
 	}

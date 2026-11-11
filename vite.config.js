@@ -10,9 +10,9 @@ export default defineConfig({
     root: '.',
     resolve: {
         alias: {
-            '@contributte/datagrid/assets': path.resolve(__dirname, 'node_modules/@contributte/datagrid/assets'),
-            '@contributte/datagrid': path.resolve(__dirname, 'node_modules/@contributte/datagrid/assets/index.ts'),
-            '@': path.resolve(__dirname, 'private/assets'),
+            '@contributte/datagrid/assets': path.resolve(import.meta.dirname, 'node_modules/@contributte/datagrid/assets'),
+            '@contributte/datagrid': path.resolve(import.meta.dirname, 'node_modules/@contributte/datagrid/assets/index.ts'),
+            '@': path.resolve(import.meta.dirname, 'private/assets'),
         }
     },
     plugins: [
