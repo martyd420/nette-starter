@@ -30,8 +30,17 @@ class MailerFactory
 			};
 		}
 
-		if (isset($this->config['smtp']['host'])) {
-			return new SmtpMailer(...$this->config['smtp']);
+		$smtp = $this->config['smtp'] ?? [];
+		if (isset($smtp['host'])) {
+			// SmtpMailer requires strings for credentials; an SMTP relay without
+			// authentication (e.g. Mailpit) leaves them null in the config.
+			return new SmtpMailer(
+				host: $smtp['host'],
+				username: $smtp['username'] ?? '',
+				password: $smtp['password'] ?? '',
+				port: isset($smtp['port']) ? (int) $smtp['port'] : null,
+				encryption: $smtp['encryption'] ?? null,
+			);
 		}
 
 		return new SendmailMailer();
